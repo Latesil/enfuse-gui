@@ -1,0 +1,7 @@
+data/com.gitlab.Latesil.enfuse-gui.desktop.in
+data/com.gitlab.Latesil.enfuse-gui.appdata.xml.in
+data/com.gitlab.Latesil.enfuse-gui.gschema.xml
+src/window.ui
+src/main.py
+src/window.py
+

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="enfuse-gui">
+	<schema id="com.gitlab.Latesil.enfuse-gui" path="/com/gitlab/Latesil/enfuse-gui/">
+	</schema>
+</schemalist>
