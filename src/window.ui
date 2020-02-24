@@ -11,6 +11,14 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="show_close_button">True</property>
+        <child>
+          <object class="GtkButton" id="start-button">
+            <property name="label" translatable="yes">Start</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+        </child>
         <child type="title">
           <object class="GtkStackSwitcher" id="main_stack_switcher">
             <property name="visible">True</property>
