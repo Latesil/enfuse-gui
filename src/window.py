@@ -33,7 +33,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         about.set_program_name(_("Enfuse GUI"))
         about.set_version("0.0.1")
         about.set_authors(["Latesil"])
-        about.set_logo_icon_name('com.gitlab.Latesil.enfuse-gui')
+        #about.set_logo_icon_name('com.gitlab.Latesil.enfuse-gui')
         about.set_copyright("GPLv3+")
         about.set_comments(_("A simple GUI for enfuse script"))
         about.set_website("https://gitlab.com/Latesil/enfuse-gui")
