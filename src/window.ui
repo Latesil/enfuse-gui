@@ -2,35 +2,6 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <object class="GtkAdjustment" id="leevels_adjustment">
-    <property name="lower">-29</property>
-    <property name="upper">29</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
-  <object class="GtkListStore" id="tiff_compression_liststore">
-    <columns>
-      <!-- column-name Type -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">deflate</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">jpeg</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">lzw</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">none</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">packbits</col>
-      </row>
-    </data>
-  </object>
   <template class="EnfuseGuiWindow" parent="GtkApplicationWindow">
     <property name="can_focus">False</property>
     <property name="default_width">600</property>
@@ -96,53 +67,220 @@
             <property name="orientation">vertical</property>
             <property name="spacing">5</property>
             <child>
-              <object class="GtkBox" id="levels_box">
+              <object class="GtkFrame" id="common_options_frame_">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="spacing">5</property>
-                <property name="homogeneous">True</property>
+                <property name="margin_left">5</property>
+                <property name="margin_right">5</property>
+                <property name="margin_top">5</property>
+                <property name="margin_bottom">5</property>
+                <property name="label_xalign">0</property>
+                <property name="shadow_type">out</property>
                 <child>
-                  <object class="GtkLabel" id="levels_label">
+                  <object class="GtkAlignment">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="halign">end</property>
-                    <property name="label" translatable="yes">Levels</property>
+                    <property name="margin_left">5</property>
+                    <property name="margin_right">5</property>
+                    <property name="margin_top">5</property>
+                    <property name="margin_bottom">5</property>
+                    <property name="left_padding">12</property>
+                    <child>
+                      <object class="GtkBox" id="common_options_box">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">5</property>
+                        <property name="homogeneous">True</property>
+                        <child>
+                          <object class="GtkBox" id="levels_box">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="spacing">5</property>
+                            <property name="homogeneous">True</property>
+                            <child>
+                              <object class="GtkLabel" id="levels_label">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">end</property>
+                                <property name="label" translatable="yes">Levels</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSpinButton" id="levels_spin_button">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="editable">False</property>
+                                <property name="text" translatable="yes">-9</property>
+                                <property name="input_purpose">digits</property>
+                                <property name="adjustment">leevels_adjustment</property>
+                                <property name="value">-9</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkCheckButton" id="levels_checkbutton">
+                                <property name="label" translatable="yes">Auto</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">False</property>
+                                <property name="halign">end</property>
+                                <property name="active">True</property>
+                                <property name="draw_indicator">True</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">2</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkBox" id="output_box">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="spacing">5</property>
+                            <property name="homogeneous">True</property>
+                            <child>
+                              <object class="GtkLabel" id="output_label">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">end</property>
+                                <property name="label" translatable="yes">Output</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkEntry" id="output_entry">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="placeholder_text" translatable="yes">Output filename</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="output_labe">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">end</property>
+                                <property name="label" translatable="yes">default: a.tiff</property>
+                                <attributes>
+                                  <attribute name="weight" value="thin"/>
+                                  <attribute name="scale" value="-600"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">2</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkBox" id="compression">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="spacing">5</property>
+                            <property name="homogeneous">True</property>
+                            <child>
+                              <object class="GtkLabel" id="compression_label">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">end</property>
+                                <property name="label" translatable="yes">Compression</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkMenuButton" id="tiff_compression_menubutton">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="popover">tiff_compression_popover</property>
+                                <child>
+                                  <object class="GtkLabel" id="tiff_compression_label">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="label" translatable="yes">Tiff</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkMenuButton" id="jpeg_compression_menubutton">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="popover">jpeg_compression_popover</property>
+                                <child>
+                                  <object class="GtkLabel" id="jpeg_compression_label">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="label" translatable="yes">JPEG</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">2</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
                 </child>
-                <child>
-                  <object class="GtkSpinButton" id="levels_spin_button">
+                <child type="label">
+                  <object class="GtkLabel" id="common_options_frame">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="editable">False</property>
-                    <property name="input_purpose">digits</property>
-                    <property name="adjustment">leevels_adjustment</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Common Options</property>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkCheckButton" id="levels_checkbutton">
-                    <property name="label" translatable="yes">Auto</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">False</property>
-                    <property name="halign">end</property>
-                    <property name="active">True</property>
-                    <property name="draw_indicator">True</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
                 </child>
               </object>
               <packing>
@@ -152,53 +290,41 @@
               </packing>
             </child>
             <child>
-              <object class="GtkBox" id="output_box">
+              <object class="GtkFrame" id="advanced_options_frame_">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="spacing">5</property>
-                <property name="homogeneous">True</property>
+                <property name="label_xalign">0</property>
+                <property name="shadow_type">in</property>
                 <child>
-                  <object class="GtkLabel" id="output_label">
+                  <object class="GtkAlignment">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="halign">end</property>
-                    <property name="label" translatable="yes">Output</property>
+                    <property name="left_padding">12</property>
+                    <child>
+                      <object class="GtkBox" id="advanced_options_box">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <property name="homogeneous">True</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                    </child>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
                 </child>
-                <child>
-                  <object class="GtkEntry" id="output_entry">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="primary_icon_tooltip_text" translatable="yes">Default: a.tiff</property>
-                    <property name="placeholder_text" translatable="yes">Output filename</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="output_labe">
+                <child type="label">
+                  <object class="GtkLabel" id="advanced_options_frame">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="halign">end</property>
-                    <property name="label" translatable="yes">default: a.tiff</property>
-                    <attributes>
-                      <attribute name="weight" value="thin"/>
-                      <attribute name="scale" value="-600"/>
-                    </attributes>
+                    <property name="label" translatable="yes">Advanced Options</property>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
                 </child>
               </object>
               <packing>
@@ -208,54 +334,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkBox" id="compression">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="spacing">5</property>
-                <property name="homogeneous">True</property>
-                <child>
-                  <object class="GtkLabel" id="compression_label">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="halign">end</property>
-                    <property name="label" translatable="yes">Compression</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkMenuButton" id="tiff_compression_menubutton">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="popover">tiff_compression_popover</property>
-                    <child>
-                      <object class="GtkButton" id="tiff_compression_button">
-                        <property name="label" translatable="yes">Tiff</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
+              <placeholder/>
             </child>
             <child>
               <placeholder/>
@@ -270,14 +349,154 @@
       </object>
     </child>
   </template>
+  <object class="GtkAdjustment" id="jpeg_compression_jpeg_adjustment">
+    <property name="upper">100</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="jpeg_compression_jpeg_arith_adjustment">
+    <property name="upper">100</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkListStore" id="jpeg_compression_liststore">
+    <columns>
+      <!-- column-name jpeg-compression_name -->
+      <column type="gchararray"/>
+      <!-- column-name jpeg_compression_level -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">jpeg</col>
+        <col id="1">0</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkAdjustment" id="leevels_adjustment">
+    <property name="lower">-29</property>
+    <property name="upper">29</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkListStore" id="tiff_compression_liststore">
+    <columns>
+      <!-- column-name Type -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">deflate</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">jpeg</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">lzw</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">none</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">packbits</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkPopover" id="tiff_compression_popover">
     <property name="can_focus">False</property>
     <property name="relative_to">tiff_compression_menubutton</property>
     <child>
-      <object class="GtkComboBox" id="tiff_compression_combobox">
+      <object class="GtkComboBoxText" id="tiff_compression_combobox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="model">tiff_compression_liststore</property>
+        <property name="active">0</property>
+        <property name="active_id">0</property>
+        <items>
+          <item id="0" translatable="yes">defliate</item>
+          <item id="1" translatable="yes">jpeg</item>
+          <item id="2" translatable="yes">none</item>
+          <item id="3" translatable="yes">packbits</item>
+          <item id="4" translatable="yes">lzw</item>
+        </items>
+      </object>
+    </child>
+  </object>
+  <object class="GtkPopover" id="jpeg_compression_jpeg_arith_popover">
+    <property name="can_focus">False</property>
+    <property name="relative_to">jpeg_compression_jpeg_arith_menubutton</property>
+    <child>
+      <object class="GtkSpinButton" id="jpeg_compression_jpeg_arith_spinbutton">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="adjustment">jpeg_compression_jpeg_arith_adjustment</property>
+      </object>
+    </child>
+  </object>
+  <object class="GtkPopover" id="jpeg_compression_jpeg_popover">
+    <property name="can_focus">False</property>
+    <property name="relative_to">jpeg_compression_jpeg_menubutton</property>
+    <child>
+      <object class="GtkSpinButton" id="jpeg_compression_jpeg">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="adjustment">jpeg_compression_jpeg_adjustment</property>
+      </object>
+    </child>
+  </object>
+  <object class="GtkPopover" id="jpeg_compression_popover">
+    <property name="can_focus">False</property>
+    <property name="relative_to">jpeg_compression_menubutton</property>
+    <child>
+      <object class="GtkBox" id="jpeg_compression_box">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_left">5</property>
+        <property name="margin_right">5</property>
+        <property name="margin_top">5</property>
+        <property name="margin_bottom">5</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">5</property>
+        <property name="homogeneous">True</property>
+        <child>
+          <object class="GtkMenuButton" id="jpeg_compression_jpeg_menubutton">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="popover">jpeg_compression_jpeg_popover</property>
+            <child>
+              <object class="GtkLabel" id="jpeg_compression_jpeg_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Jpeg</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkMenuButton" id="jpeg_compression_jpeg_arith_menubutton">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="popover">jpeg_compression_jpeg_arith_popover</property>
+            <child>
+              <object class="GtkLabel" id="jpeg_compression_jpeg_arith">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Jpeg Arith</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
       </object>
     </child>
   </object>
