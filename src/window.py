@@ -23,6 +23,22 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     __gtype_name__ = 'EnfuseGuiWindow'
 
     label = Gtk.Template.Child()
+    about_button = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+    def on_about_button_clicked(self, button):
+        about = Gtk.AboutDialog()
+        about.set_program_name(_("Enfuse GUI"))
+        about.set_version("0.0.1")
+        about.set_authors(["Latesil"])
+        about.set_logo_icon_name('com.gitlab.Latesil.enfuse-gui')
+        about.set_copyright("GPLv3+")
+        about.set_comments(_("A simple GUI for enfuse script"))
+        about.set_website("https://gitlab.com/Latesil/enfuse-gui")
+        about.set_website_label(_("Website"))
+        about.set_wrap_license(True)
+        about.set_license_type(Gtk.License.GPL_3_0)
+        about.run()
+        about.destroy()
