@@ -28,7 +28,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     header_bar_menubutton = Gtk.Template.Child()
     start_button = Gtk.Template.Child()
     levels_spin_button = Gtk.Template.Child()
-    on_levels_checkbutton_toggled = Gtk.Template.Child()
+    levels_checkbutton = Gtk.Template.Child()
     advanced_options_frame_ = Gtk.Template.Child()
     jpeg_compression_jpeg_menubutton = Gtk.Template.Child()
     jpeg_compression_jpeg_arith_menubutton = Gtk.Template.Child()
@@ -38,6 +38,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         super().__init__(**kwargs)
 
         self.start_button.set_visible(True)
+        self.levels_spin_button.set_sensitive(False)
 
     @Gtk.Template.Callback()
     def on_start_button_clicked(self, button):
@@ -48,8 +49,11 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         print('on_levels_spin_button_value_changed')
 
     @Gtk.Template.Callback()
-    def on_levels_checkbutton_toggled(self, btn):
-        print('on_levels_checkbutton_toggled')
+    def on_levels_checkbutton_toggled(self, button):
+        if button.get_active():
+            self.levels_spin_button.set_sensitive(False)
+        else:
+            self.levels_spin_button.set_sensitive(True)
 
     @Gtk.Template.Callback()
     def on_output_entry_changed(self, entry):
@@ -101,10 +105,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def on_show_advanced_check_button_toggled(self, button):
-        if button.get_active():
-            self.advanced_options_frame_.set_visible(True)
-        else:
-            self.advanced_options_frame_.set_visible(False)
+        self.advanced_options_frame_.set_visible(button.get_active())
 
     @Gtk.Template.Callback()
     def on_jpeg_compression_radio_button_group_changed(self, widget):

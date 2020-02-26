@@ -239,11 +239,9 @@
                               <object class="GtkSpinButton" id="levels_spin_button">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="editable">False</property>
-                                <property name="text" translatable="yes">-9</property>
+                                <property name="text" translatable="yes">0</property>
                                 <property name="input_purpose">digits</property>
                                 <property name="adjustment">leevels_adjustment</property>
-                                <property name="value">-9</property>
                                 <signal name="value-changed" handler="on_levels_spin_button_value_changed" swapped="no"/>
                               </object>
                               <packing>
