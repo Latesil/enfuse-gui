@@ -39,6 +39,7 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="adjustment">jpeg_compression_jpeg_adjustment</property>
+        <signal name="value-changed" handler="on_jpeg_compression_jpeg_value_changed" swapped="no"/>
       </object>
     </child>
   </object>
@@ -54,6 +55,7 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="adjustment">jpeg_compression_jpeg_arith_adjustment</property>
+        <signal name="value-changed" handler="on_jpeg_compression_jpeg_arith_spinbutton_value_changed" swapped="no"/>
       </object>
     </child>
   </object>
@@ -115,10 +117,11 @@
         <property name="can_focus">False</property>
         <property name="show_close_button">True</property>
         <child>
-          <object class="GtkButton" id="start-button">
+          <object class="GtkButton" id="start_button">
             <property name="label" translatable="yes">Start</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <signal name="clicked" handler="on_start_button_clicked" swapped="no"/>
           </object>
         </child>
         <child type="title">
@@ -241,6 +244,7 @@
                                 <property name="input_purpose">digits</property>
                                 <property name="adjustment">leevels_adjustment</property>
                                 <property name="value">-9</property>
+                                <signal name="value-changed" handler="on_levels_spin_button_value_changed" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -257,6 +261,7 @@
                                 <property name="halign">end</property>
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
+                                <signal name="toggled" handler="on_levels_checkbutton_toggled" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -295,6 +300,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="placeholder_text" translatable="yes">a.tiff</property>
+                                <signal name="changed" handler="on_output_entry_changed" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -463,6 +469,7 @@
                                   <item id="1" translatable="yes">CIELAB</item>
                                   <item id="2" translatable="yes">CIECAM</item>
                                 </items>
+                                <signal name="changed" handler="on_blend_colorspace_combobox_changed" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -518,6 +525,7 @@
                                   <item id="3" translatable="yes">r32</item>
                                   <item translatable="yes">r64</item>
                                 </items>
+                                <signal name="changed" handler="on_depth_combobox_changed" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -635,6 +643,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="use_stock">True</property>
                                 <property name="draw_indicator">True</property>
+                                <signal name="toggled" handler="on_associated_alpha_hack_checkbutton_toggled" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -690,6 +699,7 @@
                                   <item id="2" translatable="yes">vertical</item>
                                   <item id="3" translatable="yes">both</item>
                                 </items>
+                                <signal name="changed" handler="on_wrap_combobox_changed" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -781,6 +791,7 @@
                                 <property name="adjustment">exposure_weight_adjustment</property>
                                 <property name="digits">2</property>
                                 <property name="value">1</property>
+                                <signal name="value-changed" handler="on_exposure_weight_spinbutton_value_changed" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -832,6 +843,7 @@
                                 <property name="adjustment">saturation_weight_adjustment</property>
                                 <property name="digits">2</property>
                                 <property name="value">0.20000000000000001</property>
+                                <signal name="value-changed" handler="on_saturation_weight_spin_button_value_changed" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -882,6 +894,7 @@
                                 <property name="can_focus">True</property>
                                 <property name="adjustment">contrast_weight_adjustment</property>
                                 <property name="digits">2</property>
+                                <signal name="value-changed" handler="on_contrast_weight_spinbutton_value_changed" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -932,6 +945,7 @@
                                 <property name="can_focus">True</property>
                                 <property name="adjustment">entropy_weight_adjustment</property>
                                 <property name="digits">2</property>
+                                <signal name="value-changed" handler="on_entropy_weight_spinbutton_value_changed" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -983,6 +997,7 @@
                                 <property name="adjustment">exposure_optimum_adjustment</property>
                                 <property name="digits">2</property>
                                 <property name="value">0.5</property>
+                                <signal name="value-changed" handler="on_exposure_optimum_spinbutton_value_changed" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -1034,6 +1049,7 @@
                                 <property name="adjustment">exposure_width_adjustment</property>
                                 <property name="digits">2</property>
                                 <property name="value">0.20000000000000001</property>
+                                <signal name="value-changed" handler="on_exposure_width_spinbutton_value_changed" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -1084,6 +1100,8 @@
                                 <property name="receives_default">False</property>
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
+                                <signal name="group-changed" handler="on_soft_mask_radio_button_group_changed" swapped="no"/>
+                                <signal name="toggled" handler="on_soft_mask_radio_button_toggled" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -1099,6 +1117,7 @@
                                 <property name="receives_default">False</property>
                                 <property name="draw_indicator">True</property>
                                 <property name="group">soft_mask_radio_button</property>
+                                <signal name="toggled" handler="on_hard_mask_radio_button_toggled" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -1184,6 +1203,7 @@
                 <property name="margin_bottom">5</property>
                 <property name="use_stock">True</property>
                 <property name="draw_indicator">True</property>
+                <signal name="toggled" handler="on_show_advanced_check_button_toggled" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1215,6 +1235,7 @@
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <property name="text" translatable="yes">About</property>
+            <signal name="clicked" handler="on_about_button_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -1252,6 +1273,8 @@
                 <property name="use_stock">True</property>
                 <property name="active">True</property>
                 <property name="draw_indicator">True</property>
+                <signal name="group-changed" handler="on_jpeg_compression_radio_button_group_changed" swapped="no"/>
+                <signal name="toggled" handler="on_jpeg_compression_radio_button_toggled" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1300,6 +1323,7 @@
                 <property name="active">True</property>
                 <property name="draw_indicator">True</property>
                 <property name="group">jpeg_compression_radio_button</property>
+                <signal name="toggled" handler="on_jpeg_arith_compression_radiobutton_toggled" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1349,6 +1373,7 @@
         <property name="margin_top">5</property>
         <property name="margin_bottom">5</property>
         <property name="input_purpose">number</property>
+        <signal name="changed" handler="on_position_entry_changed" swapped="no"/>
       </object>
     </child>
   </object>
@@ -1364,6 +1389,7 @@
         <property name="margin_top">5</property>
         <property name="margin_bottom">5</property>
         <property name="input_purpose">digits</property>
+        <signal name="changed" handler="on_size_entry_changed" swapped="no"/>
       </object>
     </child>
   </object>
@@ -1381,6 +1407,7 @@
           <item id="3" translatable="yes">packbits</item>
           <item id="4" translatable="yes">lzw</item>
         </items>
+        <signal name="changed" handler="on_tiff_compression_combobox_changed" swapped="no"/>
       </object>
     </child>
   </object>

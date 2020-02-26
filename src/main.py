@@ -18,8 +18,6 @@
 import sys
 import gi
 
-#test
-
 gi.require_version('Gtk', '3.0')
 
 from gi.repository import Gtk, Gio
