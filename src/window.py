@@ -29,6 +29,10 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     start_button = Gtk.Template.Child()
     levels_spin_button = Gtk.Template.Child()
     on_levels_checkbutton_toggled = Gtk.Template.Child()
+    advanced_options_frame_ = Gtk.Template.Child()
+    jpeg_compression_jpeg_menubutton = Gtk.Template.Child()
+    jpeg_compression_jpeg_arith_menubutton = Gtk.Template.Child()
+
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -96,8 +100,11 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         print('on_soft_mask_radio_button_group_changed')
 
     @Gtk.Template.Callback()
-    def on_show_advanced_check_button_toggled(self, scale):
-        print('on_show_advanced_check_button_toggled')
+    def on_show_advanced_check_button_toggled(self, button):
+        if button.get_active():
+            self.advanced_options_frame_.set_visible(True)
+        else:
+            self.advanced_options_frame_.set_visible(False)
 
     @Gtk.Template.Callback()
     def on_jpeg_compression_radio_button_group_changed(self, widget):
