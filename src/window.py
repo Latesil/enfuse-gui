@@ -50,6 +50,8 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     entropy_weight_spinbutton = Gtk.Template.Child()
     exposure_optimum_spinbutton = Gtk.Template.Child()
     exposure_width_spinbutton = Gtk.Template.Child()
+    hard_mask_radio_button = Gtk.Template.Child()
+    soft_mask_radio_button = Gtk.Template.Child()
 
 
     def __init__(self, **kwargs):
@@ -75,6 +77,8 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         self.settings.connect("changed::entropy-weight", self.on_double_scale_changed, self.entropy_weight_spinbutton)
         self.settings.connect("changed::exposure-optimum", self.on_double_scale_changed, self.exposure_optimum_spinbutton)
         self.settings.connect("changed::exposure-width", self.on_double_scale_changed, self.exposure_width_spinbutton)
+        self.settings.connect("changed::hard-mask", self.on_radiobutton_changed, self.hard_mask_radio_button)
+        self.settings.connect("changed::soft-mask", self.on_radiobutton_changed, self.soft_mask_radio_button)
 
     @Gtk.Template.Callback()
     def on_start_button_clicked(self, button):
@@ -157,8 +161,12 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         print('on_size_entry_changed')
 
     @Gtk.Template.Callback()
-    def on_soft_mask_radio_button_toggled(self, widget):
-        print('on_soft_mask_radio_button_toggled')
+    def on_soft_mask_radio_button_toggled(self, button):
+        self.settings.set_boolean('soft-mask', button.get_active())
+
+    @Gtk.Template.Callback()
+    def on_hard_mask_radio_button_toggled(self, button):
+        self.settings.set_boolean('hard-mask', button.get_active())
 
     @Gtk.Template.Callback()
     def on_tiff_compression_combobox_changed(self, combobox):
@@ -189,10 +197,6 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
             self.settings.set_boolean('jpeg-compression-arith-boolean', True)
 
     @Gtk.Template.Callback()
-    def on_hard_mask_radio_button_toggled(self, widget):
-        print('on_hard_mask_radio_button_toggled')
-
-    @Gtk.Template.Callback()
     def on_about_button_clicked(self, button):
         about = Gtk.AboutDialog()
         about.set_program_name("Enfuse GUI")
@@ -216,3 +220,4 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
 
     def on_double_scale_changed(self, settings, key, button):
         button.set_value(settings.get_double(key))
+

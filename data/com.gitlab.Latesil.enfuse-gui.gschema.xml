@@ -76,5 +76,15 @@
       <summary>Exposure width value</summary>
       <description>Characteristic width of the weighting function</description>
     </key>
+	  <key type="b" name="soft-mask">
+      <default>true</default>
+      <summary>Soft mask</summary>
+      <description>Average over all masks</description>
+    </key>
+	  <key type="b" name="hard-mask">
+      <default>false</default>
+      <summary>Hard mask</summary>
+      <description>Force hard blend masks and no averaging on finest scale; this is especially useful for focus stacks with thin and high contrast features, but leads to increased noise</description>
+    </key>
 	</schema>
 </schemalist>
