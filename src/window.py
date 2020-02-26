@@ -44,6 +44,13 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     output_entry = Gtk.Template.Child()
     show_advanced_check_button = Gtk.Template.Child()
 
+    exposure_weight_spinbutton = Gtk.Template.Child()
+    saturation_weight_spin_button = Gtk.Template.Child()
+    contrast_weight_spinbutton = Gtk.Template.Child()
+    entropy_weight_spinbutton = Gtk.Template.Child()
+    exposure_optimum_spinbutton = Gtk.Template.Child()
+    exposure_width_spinbutton = Gtk.Template.Child()
+
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -62,6 +69,12 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         self.settings.connect("changed::jpeg-compression-arith", self.on_scale_changed, self.jpeg_compression_jpeg_arith_spinbutton)
         self.settings.connect("changed::jpeg-compression-boolean", self.on_radiobutton_changed, self.jpeg_compression_radio_button)
         self.settings.connect("changed::jpeg-compression-arith-boolean", self.on_radiobutton_changed, self.jpeg_arith_compression_radiobutton)
+        self.settings.connect("changed::exposure-weight", self.on_double_scale_changed, self.exposure_weight_spinbutton)
+        self.settings.connect("changed::saturation-weight", self.on_double_scale_changed, self.saturation_weight_spin_button)
+        self.settings.connect("changed::contrast-weight", self.on_double_scale_changed, self.contrast_weight_spinbutton)
+        self.settings.connect("changed::entropy-weight", self.on_double_scale_changed, self.entropy_weight_spinbutton)
+        self.settings.connect("changed::exposure-optimum", self.on_double_scale_changed, self.exposure_optimum_spinbutton)
+        self.settings.connect("changed::exposure-width", self.on_double_scale_changed, self.exposure_width_spinbutton)
 
     @Gtk.Template.Callback()
     def on_start_button_clicked(self, button):
@@ -100,27 +113,27 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def on_exposure_weight_spinbutton_value_changed(self, scale):
-        print('on_exposure_weight_spinbutton_value_changed')
+        self.settings.set_double('exposure-weight', scale.get_value())
 
     @Gtk.Template.Callback()
     def on_saturation_weight_spin_button_value_changed(self, scale):
-        print('on_saturation_weight_spin_button_value_changed')
+        self.settings.set_double('saturation-weight', scale.get_value())
 
     @Gtk.Template.Callback()
     def on_contrast_weight_spinbutton_value_changed(self, scale):
-        print('on_contrast_weight_spinbutton_value_changed')
+        self.settings.set_double('contrast-weight', scale.get_value())
 
     @Gtk.Template.Callback()
     def on_entropy_weight_spinbutton_value_changed(self, scale):
-        print('on_entropy_weight_spinbutton_value_changed')
+        self.settings.set_double('entropy-weight', scale.get_value())
 
     @Gtk.Template.Callback()
     def on_exposure_optimum_spinbutton_value_changed(self, scale):
-        print('on_exposure_optimum_spinbutton_value_changed')
+        self.settings.set_double('exposure-optimum', scale.get_value())
 
     @Gtk.Template.Callback()
     def on_exposure_width_spinbutton_value_changed(self, scale):
-        print('on_exposure_width_spinbutton_value_changed')
+        self.settings.set_double('exposure-width', scale.get_value())
 
     @Gtk.Template.Callback()
     def on_soft_mask_radio_button_group_changed(self, widget):
@@ -153,10 +166,6 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         model = combobox.get_model()
         tiff_compression_method = model[tree_iter][0]
         self.settings.set_string('tiff-compression', tiff_compression_method)
-
-    @Gtk.Template.Callback()
-    def on_exposure_weight_spinbutton_value_changed(self, widget):
-        print('on_exposure_weight_spinbutton_value_changed')
 
     @Gtk.Template.Callback()
     def on_jpeg_compression_jpeg_value_changed(self, scale):
@@ -204,3 +213,6 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
 
     def on_radiobutton_changed(self, settings, key, button):
         button.set_active(settings.get_boolean(key))
+
+    def on_double_scale_changed(self, settings, key, button):
+        button.set_value(settings.get_double(key))

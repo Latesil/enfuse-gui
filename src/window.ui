@@ -795,6 +795,8 @@
                                 <property name="can_focus">True</property>
                                 <property name="adjustment">exposure_weight_adjustment</property>
                                 <property name="digits">2</property>
+                                <property name="snap_to_ticks">True</property>
+                                <property name="numeric">True</property>
                                 <property name="value">1</property>
                                 <signal name="value-changed" handler="on_exposure_weight_spinbutton_value_changed" swapped="no"/>
                               </object>
@@ -847,6 +849,8 @@
                                 <property name="can_focus">True</property>
                                 <property name="adjustment">saturation_weight_adjustment</property>
                                 <property name="digits">2</property>
+                                <property name="snap_to_ticks">True</property>
+                                <property name="numeric">True</property>
                                 <property name="value">0.20000000000000001</property>
                                 <signal name="value-changed" handler="on_saturation_weight_spin_button_value_changed" swapped="no"/>
                               </object>
@@ -899,6 +903,8 @@
                                 <property name="can_focus">True</property>
                                 <property name="adjustment">contrast_weight_adjustment</property>
                                 <property name="digits">2</property>
+                                <property name="snap_to_ticks">True</property>
+                                <property name="numeric">True</property>
                                 <signal name="value-changed" handler="on_contrast_weight_spinbutton_value_changed" swapped="no"/>
                               </object>
                               <packing>
@@ -950,6 +956,8 @@
                                 <property name="can_focus">True</property>
                                 <property name="adjustment">entropy_weight_adjustment</property>
                                 <property name="digits">2</property>
+                                <property name="snap_to_ticks">True</property>
+                                <property name="numeric">True</property>
                                 <signal name="value-changed" handler="on_entropy_weight_spinbutton_value_changed" swapped="no"/>
                               </object>
                               <packing>
@@ -1001,6 +1009,8 @@
                                 <property name="can_focus">True</property>
                                 <property name="adjustment">exposure_optimum_adjustment</property>
                                 <property name="digits">2</property>
+                                <property name="snap_to_ticks">True</property>
+                                <property name="numeric">True</property>
                                 <property name="value">0.5</property>
                                 <signal name="value-changed" handler="on_exposure_optimum_spinbutton_value_changed" swapped="no"/>
                               </object>
@@ -1053,6 +1063,8 @@
                                 <property name="can_focus">True</property>
                                 <property name="adjustment">exposure_width_adjustment</property>
                                 <property name="digits">2</property>
+                                <property name="snap_to_ticks">True</property>
+                                <property name="numeric">True</property>
                                 <property name="value">0.20000000000000001</property>
                                 <signal name="value-changed" handler="on_exposure_width_spinbutton_value_changed" swapped="no"/>
                               </object>
