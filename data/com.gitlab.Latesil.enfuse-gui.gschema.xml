@@ -19,7 +19,7 @@
 	  <key type="s" name="output">
       <default>"a.tif"</default>
       <summary>Output filename</summary>
-      <description>Output filename, default is a.tiff</description>
+      <description>Output filename</description>
     </key>
 	  <key type="s" name="tiff-compression">
       <default>"none"</default>
@@ -85,6 +85,36 @@
       <default>false</default>
       <summary>Hard mask</summary>
       <description>Force hard blend masks and no averaging on finest scale; this is especially useful for focus stacks with thin and high contrast features, but leads to increased noise</description>
+    </key>
+	  <key type="s" name="blend-colorspace">
+      <default>"CIELUV"</default>
+      <summary>Blend colorspace</summary>
+      <description>Force colorspqce for blending operations</description>
+    </key>
+	  <key type="s" name="depth">
+      <default>""</default>
+      <summary>Depth image</summary>
+      <description>Set the number of bits per channel of the output image</description>
+    </key>
+	  <key type="s" name="wrap">
+      <default>"none"</default>
+      <summary>Wrap image</summary>
+      <description>Wrap  around  image  boundary</description>
+    </key>
+	  <key type="b" name="associated-alpha-hack">
+      <default>false</default>
+      <summary>Associated-alpha hack</summary>
+      <description>Associated-alpha hack for Gimp (before version 2) and Cinepaint</description>
+    </key>
+	  <key type="i" name="size">
+      <default>0</default>
+      <summary>Size</summary>
+      <description>Manually set the size of the output image; useful for cropped and shifted input TIFF images, such as those produced by Nona</description>
+    </key>
+	  <key type="i" name="position">
+      <default>0</default>
+      <summary>Position</summary>
+      <description>Manually set the size of the output image; useful for cropped and shifted input TIFF images, such as those produced by Nona</description>
     </key>
 	</schema>
 </schemalist>

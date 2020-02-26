@@ -17,14 +17,14 @@
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gio
+from gi.repository import Gtk, Gio, GObject
 
 
 @Gtk.Template(resource_path='/com/gitlab/Latesil/enfuse-gui/window.ui')
 class EnfuseGuiWindow(Gtk.ApplicationWindow):
+
     __gtype_name__ = 'EnfuseGuiWindow'
 
-    about_button = Gtk.Template.Child()
     header_bar_menubutton = Gtk.Template.Child()
     start_button = Gtk.Template.Child()
     levels_spin_button = Gtk.Template.Child()
@@ -53,6 +53,13 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     hard_mask_radio_button = Gtk.Template.Child()
     soft_mask_radio_button = Gtk.Template.Child()
 
+    blend_colorspace_combobox = Gtk.Template.Child()
+    depth_combobox = Gtk.Template.Child()
+    wrap_combobox = Gtk.Template.Child()
+    associated_alpha_hack_checkbutton = Gtk.Template.Child()
+    position_entry = Gtk.Template.Child()
+    size_entry = Gtk.Template.Child()
+
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -66,6 +73,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
             self.settings.reset(s)
 
         self.settings.connect("changed::advanced", self.on_show_advanced_check_button_changed, self.show_advanced_check_button)
+        self.settings.connect("changed::associated-alpha-hack", self.on_boolean_change, self.associated_alpha_hack_checkbutton)
         self.settings.connect("changed::levels", self.on_scale_changed, self.levels_spin_button)
         self.settings.connect("changed::jpeg-compression", self.on_scale_changed, self.jpeg_compression_jpeg)
         self.settings.connect("changed::jpeg-compression-arith", self.on_scale_changed, self.jpeg_compression_jpeg_arith_spinbutton)
@@ -79,6 +87,8 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         self.settings.connect("changed::exposure-width", self.on_double_scale_changed, self.exposure_width_spinbutton)
         self.settings.connect("changed::hard-mask", self.on_radiobutton_changed, self.hard_mask_radio_button)
         self.settings.connect("changed::soft-mask", self.on_radiobutton_changed, self.soft_mask_radio_button)
+        self.settings.connect("changed::position", self.on_scale_changed, self.position_entry)
+        self.settings.connect("changed::size", self.on_scale_changed, self.size_entry)
 
     @Gtk.Template.Callback()
     def on_start_button_clicked(self, button):
@@ -100,20 +110,20 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         self.settings.set_string('output', entry.get_text())
 
     @Gtk.Template.Callback()
-    def on_blend_colorspace_combobox_changed(self, widget):
-        print('on_blend_colorspace_combobox_changed')
+    def on_blend_colorspace_combobox_changed(self, combobox):
+        self.settings.set_string('blend-colorspace', self.get_item_from_combobox(combobox))
 
     @Gtk.Template.Callback()
-    def on_depth_combobox_changed(self, widget):
-        print('on_depth_combobox_changed')
+    def on_depth_combobox_changed(self, combobox):
+        self.settings.set_string('depth', self.get_item_from_combobox(combobox))
 
     @Gtk.Template.Callback()
-    def on_associated_alpha_hack_checkbutton_toggled(self, widget):
-        print('on_associated_alpha_hack_checkbutton_toggled')
+    def on_associated_alpha_hack_checkbutton_toggled(self, button):
+        self.settings.set_boolean('associated-alpha-hack', button.get_active())
 
     @Gtk.Template.Callback()
-    def on_wrap_combobox_changed(self, widget):
-        print('on_wrap_combobox_changed')
+    def on_wrap_combobox_changed(self, combobox):
+        self.settings.set_string('wrap', self.get_item_from_combobox(combobox))
 
     @Gtk.Template.Callback()
     def on_exposure_weight_spinbutton_value_changed(self, scale):
@@ -140,25 +150,17 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         self.settings.set_double('exposure-width', scale.get_value())
 
     @Gtk.Template.Callback()
-    def on_soft_mask_radio_button_group_changed(self, widget):
-        print('on_soft_mask_radio_button_group_changed')
-
-    @Gtk.Template.Callback()
     def on_show_advanced_check_button_toggled(self, button):
         self.advanced_options_frame_.set_visible(button.get_active())
         self.settings.set_boolean('advanced', button.get_active())
 
-    def on_show_advanced_check_button_changed(self, settings, key, button):
-        self.advanced_options_frame_.set_visible(settings.get_boolean(key))
-        button.set_active(settings.get_boolean(key))
+    @Gtk.Template.Callback()
+    def on_position_entry_value_changed(self, scale):
+        self.settings.set_int('position', scale.get_value())
 
     @Gtk.Template.Callback()
-    def on_position_entry_changed(self, widget):
-        print('on_position_entry_changed')
-
-    @Gtk.Template.Callback()
-    def on_size_entry_changed(self, widget):
-        print('on_size_entry_changed')
+    def on_size_entry_value_changed(self, scale):
+        self.settings.set_int('size', scale.get_value())
 
     @Gtk.Template.Callback()
     def on_soft_mask_radio_button_toggled(self, button):
@@ -170,10 +172,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def on_tiff_compression_combobox_changed(self, combobox):
-        tree_iter = combobox.get_active_iter()
-        model = combobox.get_model()
-        tiff_compression_method = model[tree_iter][0]
-        self.settings.set_string('tiff-compression', tiff_compression_method)
+        self.settings.set_string('tiff-compression', self.get_item_from_combobox(combobox))
 
     @Gtk.Template.Callback()
     def on_jpeg_compression_jpeg_value_changed(self, scale):
@@ -212,6 +211,12 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         about.run()
         about.destroy()
 
+    #_____________________________________________________________________
+
+    def on_show_advanced_check_button_changed(self, settings, key, button):
+        self.advanced_options_frame_.set_visible(settings.get_boolean(key))
+        button.set_active(settings.get_boolean(key))
+
     def on_scale_changed(self, settings, key, button):
         button.set_value(settings.get_int(key))
 
@@ -220,4 +225,15 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
 
     def on_double_scale_changed(self, settings, key, button):
         button.set_value(settings.get_double(key))
+
+    def on_boolean_change(self, settings, key, button):
+        button.set_active(settings.get_boolean(key))
+
+    #______________________________________________________________________
+
+    def get_item_from_combobox(self, box):
+        tree_iter = box.get_active_iter()
+        model = box.get_model()
+        item = model[tree_iter][0]
+        return item
 
