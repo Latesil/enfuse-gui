@@ -1397,6 +1397,7 @@
       <object class="GtkComboBoxText" id="tiff_compression_combobox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="active">2</property>
         <items>
           <item id="0" translatable="yes">defliate</item>
           <item id="1" translatable="yes">jpeg</item>

@@ -48,8 +48,13 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         self.jpeg_compression_jpeg_arith_menubutton.set_sensitive(False)
 
         self.advanced_options_frame_.set_visible(self.settings.get_boolean('advanced'))
-
         self.settings.connect("changed::advanced", self.on_show_advanced_check_button_changed, self.show_advanced_check_button)
+
+
+        if self.settings.get_string('output') == "":
+            self.settings.reset('output')
+
+        self.output_entry.set_text(self.settings.get_string('output'))
 
     @Gtk.Template.Callback()
     def on_start_button_clicked(self, button):
@@ -140,8 +145,11 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         print('on_soft_mask_radio_button_toggled')
 
     @Gtk.Template.Callback()
-    def on_tiff_compression_combobox_changed(self, widget):
-        print('on_tiff_compression_combobox_changed')
+    def on_tiff_compression_combobox_changed(self, combobox):
+        tree_iter = combobox.get_active_iter()
+        model = combobox.get_model()
+        tiff_compression_method = model[tree_iter][0]
+        self.settings.set_string('tiff-compression', tiff_compression_method)
 
     @Gtk.Template.Callback()
     def on_exposure_weight_spinbutton_value_changed(self, widget):

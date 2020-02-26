@@ -18,8 +18,13 @@
     </key>
 	  <key type="s" name="output">
       <default>"a.tif"</default>
-      <summary>Output filenamr</summary>
+      <summary>Output filename</summary>
       <description>Output filename, default is a.tiff</description>
+    </key>
+	  <key type="s" name="tiff-compression">
+      <default>"none"</default>
+      <summary>Tiff compression</summary>
+      <description>Tiff compression for output file</description>
     </key>
 	</schema>
 </schemalist>
