@@ -2,5 +2,6 @@
 <gresources>
   <gresource prefix="/com/gitlab/Latesil/enfuse-gui">
     <file>window.ui</file>
+    <file>photo_box.ui</file>
   </gresource>
 </gresources>

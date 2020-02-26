@@ -66,7 +66,6 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
 
         self.settings = Gio.Settings.new('com.gitlab.Latesil.enfuse-gui')
 
-        self.start_button.set_visible(True)
         self.jpeg_compression_jpeg_arith_menubutton.set_sensitive(False)
 
         for s in self.settings.list_keys():
@@ -181,6 +180,10 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     @Gtk.Template.Callback()
     def on_jpeg_compression_jpeg_arith_spinbutton_value_changed(self, scale):
         self.settings.set_int('jpeg-compression-arith', scale.get_value())
+
+    @Gtk.Template.Callback()
+    def on_add_button_clicked(self, button):
+        print('add')
 
     @Gtk.Template.Callback()
     def on_jpeg_compression_radio_button_toggled(self, button):

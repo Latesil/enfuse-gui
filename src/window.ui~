@@ -140,18 +140,6 @@
             <signal name="clicked" handler="on_start_button_clicked" swapped="no"/>
           </object>
         </child>
-        <child>
-          <object class="GtkButton" id="add_button">
-            <property name="label" translatable="yes">Add</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <signal name="clicked" handler="on_add_button_clicked" swapped="no"/>
-          </object>
-          <packing>
-            <property name="position">2</property>
-          </packing>
-        </child>
         <child type="title">
           <object class="GtkStackSwitcher" id="main_stack_switcher">
             <property name="visible">True</property>
@@ -195,35 +183,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="shadow_type">in</property>
-                <child>
-                  <object class="GtkViewport" id="photos_viewport">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkListBox" id="photos_list_box">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="selection_mode">none</property>
-                        <child>
-                          <object class="GtkListBoxRow" id="photos_list_box_row">
-                            <property name="width_request">100</property>
-                            <property name="height_request">80</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="selectable">False</property>
-                            <child>
-                              <object class="GtkLabel" id="photos_label">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Add photos here</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
               </object>
               <packing>
                 <property name="expand">True</property>
