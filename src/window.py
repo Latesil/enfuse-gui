@@ -32,13 +32,24 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     advanced_options_frame_ = Gtk.Template.Child()
     jpeg_compression_jpeg_menubutton = Gtk.Template.Child()
     jpeg_compression_jpeg_arith_menubutton = Gtk.Template.Child()
+    tiff_compression_menubutton = Gtk.Template.Child()
+    jpeg_compression_menubutton = Gtk.Template.Child()
+    output_entry = Gtk.Template.Child()
+    show_advanced_check_button = Gtk.Template.Child()
 
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
+        self.settings = Gio.Settings.new('com.gitlab.Latesil.enfuse-gui')
+
         self.start_button.set_visible(True)
         self.levels_spin_button.set_sensitive(False)
+        self.jpeg_compression_jpeg_arith_menubutton.set_sensitive(False)
+
+        self.advanced_options_frame_.set_visible(self.settings.get_boolean('advanced'))
+
+        self.settings.connect("changed::advanced", self.on_show_advanced_check_button_changed, self.show_advanced_check_button)
 
     @Gtk.Template.Callback()
     def on_start_button_clicked(self, button):
@@ -57,7 +68,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def on_output_entry_changed(self, entry):
-        print('on_output_entry_changed')
+        self.settings.set_string('output', entry.get_text())
 
     @Gtk.Template.Callback()
     def on_blend_colorspace_combobox_changed(self, widget):
@@ -106,6 +117,11 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     @Gtk.Template.Callback()
     def on_show_advanced_check_button_toggled(self, button):
         self.advanced_options_frame_.set_visible(button.get_active())
+        self.settings.set_boolean('advanced', button.get_active())
+
+    def on_show_advanced_check_button_changed(self, settings, key, button):
+        self.advanced_options_frame_.set_visible(settings.get_boolean(key))
+        button.set_active(settings.get_boolean(key))
 
     @Gtk.Template.Callback()
     def on_jpeg_compression_radio_button_group_changed(self, widget):
@@ -140,8 +156,13 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         print('on_jpeg_compression_jpeg_arith_spinbutton_value_changed')
 
     @Gtk.Template.Callback()
-    def on_jpeg_compression_radio_button_toggled(self, widget):
-        print('on_jpeg_compression_radio_button_toggled')
+    def on_jpeg_compression_radio_button_toggled(self, button):
+        if button.get_active():
+            self.jpeg_compression_jpeg_menubutton.set_sensitive(True)
+            self.jpeg_compression_jpeg_arith_menubutton.set_sensitive(False)
+        else:
+            self.jpeg_compression_jpeg_menubutton.set_sensitive(False)
+            self.jpeg_compression_jpeg_arith_menubutton.set_sensitive(True)
 
     @Gtk.Template.Callback()
     def on_jpeg_arith_compression_radiobutton_toggled(self, widget):

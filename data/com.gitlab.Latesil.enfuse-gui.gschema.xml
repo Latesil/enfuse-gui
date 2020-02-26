@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="enfuse-gui">
 	<schema id="com.gitlab.Latesil.enfuse-gui" path="/com/gitlab/Latesil/enfuse-gui/">
+	  <key type="i" name="levels">
+      <default>0</default>
+      <summary>Levels</summary>
+      <description>Number of blending LEVELS to use</description>
+    </key>
+	  <key type="b" name="auto-levels">
+      <default>true</default>
+      <summary>Auto levels</summary>
+      <description>Auto levels</description>
+    </key>
+	  <key type="b" name="advanced">
+      <default>false</default>
+      <summary>Show advanced</summary>
+      <description>Show advanced preferences or not</description>
+    </key>
+	  <key type="s" name="output">
+      <default>"a.tif"</default>
+      <summary>Output filenamr</summary>
+      <description>Output filename, default is a.tiff</description>
+    </key>
 	</schema>
 </schemalist>

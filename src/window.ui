@@ -297,7 +297,7 @@
                               <object class="GtkEntry" id="output_entry">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="placeholder_text" translatable="yes">a.tiff</property>
+                                <property name="placeholder_text" translatable="yes">a.tif</property>
                                 <signal name="changed" handler="on_output_entry_changed" swapped="no"/>
                               </object>
                               <packing>
@@ -1269,8 +1269,8 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
                 <property name="use_stock">True</property>
-                <property name="active">True</property>
                 <property name="draw_indicator">True</property>
+                <property name="group">jpeg_arith_compression_radiobutton</property>
                 <signal name="group-changed" handler="on_jpeg_compression_radio_button_group_changed" swapped="no"/>
                 <signal name="toggled" handler="on_jpeg_compression_radio_button_toggled" swapped="no"/>
               </object>
@@ -1318,7 +1318,6 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
                 <property name="use_stock">True</property>
-                <property name="active">True</property>
                 <property name="draw_indicator">True</property>
                 <property name="group">jpeg_compression_radio_button</property>
                 <signal name="toggled" handler="on_jpeg_arith_compression_radiobutton_toggled" swapped="no"/>
