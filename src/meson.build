@@ -29,6 +29,7 @@ enfuse_gui_sources = [
   '__init__.py',
   'main.py',
   'window.py',
+  'photo_list_box.py',
 ]
 
 install_data(enfuse_gui_sources, install_dir: moduledir)

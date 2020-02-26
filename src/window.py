@@ -19,6 +19,8 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio, GObject
 
+from .photo_list_box import PhotoListBox
+
 
 @Gtk.Template(resource_path='/com/gitlab/Latesil/enfuse-gui/window.ui')
 class EnfuseGuiWindow(Gtk.ApplicationWindow):
@@ -60,11 +62,19 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     position_entry = Gtk.Template.Child()
     size_entry = Gtk.Template.Child()
 
+    photos_list_box_row = Gtk.Template.Child()
+
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
         self.settings = Gio.Settings.new('com.gitlab.Latesil.enfuse-gui')
+
+        self.start_label = Gtk.Label()
+        self.start_label.set_text('Click add for adding your photos here')
+        self.start_label.set_visible(True)
+
+        self.photos_list_box_row.insert(self.start_label, -1)
 
         self.jpeg_compression_jpeg_arith_menubutton.set_sensitive(False)
 
@@ -183,7 +193,9 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def on_add_button_clicked(self, button):
-        print('add')
+        self.photos_list_box_row.remove(self.start_label.get_parent())
+        new_row = PhotoListBox()
+        self.photos_list_box_row.add(new_row)
 
     @Gtk.Template.Callback()
     def on_jpeg_compression_radio_button_toggled(self, button):
