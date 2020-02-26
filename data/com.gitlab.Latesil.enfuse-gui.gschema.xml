@@ -26,5 +26,15 @@
       <summary>Tiff compression</summary>
       <description>Tiff compression for output file</description>
     </key>
+	  <key type="i" name="jpeg-compression">
+      <default>0</default>
+      <summary>JPEG compression value</summary>
+      <description>JPEG compression value</description>
+    </key>
+	  <key type="i" name="jpeg-compression-arith">
+      <default>0</default>
+      <summary>JPEG arith compression value</summary>
+      <description>JPEG arith compression value</description>
+    </key>
 	</schema>
 </schemalist>

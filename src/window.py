@@ -36,6 +36,8 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     jpeg_compression_menubutton = Gtk.Template.Child()
     output_entry = Gtk.Template.Child()
     show_advanced_check_button = Gtk.Template.Child()
+    jpeg_compression_jpeg = Gtk.Template.Child()
+    jpeg_compression_jpeg_arith_spinbutton = Gtk.Template.Child()
 
 
     def __init__(self, **kwargs):
@@ -49,7 +51,9 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
 
         self.advanced_options_frame_.set_visible(self.settings.get_boolean('advanced'))
         self.settings.connect("changed::advanced", self.on_show_advanced_check_button_changed, self.show_advanced_check_button)
-        self.settings.connect("changed::levels", self.on_levels_changed, self.levels_spin_button)
+        self.settings.connect("changed::levels", self.on_scale_changed, self.levels_spin_button)
+        self.settings.connect("changed::jpeg-compression", self.on_scale_changed, self.jpeg_compression_jpeg)
+        self.settings.connect("changed::jpeg-compression-arith", self.on_scale_changed, self.jpeg_compression_jpeg_arith_spinbutton)
 
 
         if self.settings.get_string('output') == "":
@@ -63,9 +67,6 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     @Gtk.Template.Callback()
     def on_levels_spin_button_value_changed(self, scale):
         self.settings.set_int('levels', scale.get_value())
-
-    def on_levels_changed(self, settings, key, button):
-        button.set_value(settings.get_int(key))
 
     @Gtk.Template.Callback()
     def on_levels_checkbutton_toggled(self, button):
@@ -159,12 +160,12 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         print('on_exposure_weight_spinbutton_value_changed')
 
     @Gtk.Template.Callback()
-    def on_jpeg_compression_jpeg_value_changed(self, widget):
-        print('on_jpeg_compression_jpeg_value_changed')
+    def on_jpeg_compression_jpeg_value_changed(self, scale):
+        self.settings.set_int('jpeg-compression', scale.get_value())
 
     @Gtk.Template.Callback()
-    def on_jpeg_compression_jpeg_arith_spinbutton_value_changed(self, widget):
-        print('on_jpeg_compression_jpeg_arith_spinbutton_value_changed')
+    def on_jpeg_compression_jpeg_arith_spinbutton_value_changed(self, scale):
+        self.settings.set_int('jpeg-compression-arith', scale.get_value())
 
     @Gtk.Template.Callback()
     def on_jpeg_compression_radio_button_toggled(self, button):
@@ -198,3 +199,6 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         about.set_license_type(Gtk.License.GPL_3_0)
         about.run()
         about.destroy()
+
+    def on_scale_changed(self, settings, key, button):
+        button.set_value(settings.get_int(key))

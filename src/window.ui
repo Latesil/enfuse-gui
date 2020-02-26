@@ -39,6 +39,8 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="adjustment">jpeg_compression_jpeg_adjustment</property>
+        <property name="snap_to_ticks">True</property>
+        <property name="numeric">True</property>
         <signal name="value-changed" handler="on_jpeg_compression_jpeg_value_changed" swapped="no"/>
       </object>
     </child>
@@ -55,6 +57,8 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="adjustment">jpeg_compression_jpeg_arith_adjustment</property>
+        <property name="snap_to_ticks">True</property>
+        <property name="numeric">True</property>
         <signal name="value-changed" handler="on_jpeg_compression_jpeg_arith_spinbutton_value_changed" swapped="no"/>
       </object>
     </child>
