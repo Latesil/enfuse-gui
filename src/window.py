@@ -44,16 +44,16 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         self.settings = Gio.Settings.new('com.gitlab.Latesil.enfuse-gui')
 
         self.start_button.set_visible(True)
-        self.levels_spin_button.set_sensitive(False)
         self.jpeg_compression_jpeg_arith_menubutton.set_sensitive(False)
+
 
         self.advanced_options_frame_.set_visible(self.settings.get_boolean('advanced'))
         self.settings.connect("changed::advanced", self.on_show_advanced_check_button_changed, self.show_advanced_check_button)
+        self.settings.connect("changed::levels", self.on_levels_changed, self.levels_spin_button)
 
 
         if self.settings.get_string('output') == "":
             self.settings.reset('output')
-
         self.output_entry.set_text(self.settings.get_string('output'))
 
     @Gtk.Template.Callback()
@@ -62,7 +62,10 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def on_levels_spin_button_value_changed(self, scale):
-        print('on_levels_spin_button_value_changed')
+        self.settings.set_int('levels', scale.get_value())
+
+    def on_levels_changed(self, settings, key, button):
+        button.set_value(settings.get_int(key))
 
     @Gtk.Template.Callback()
     def on_levels_checkbutton_toggled(self, button):

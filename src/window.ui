@@ -238,10 +238,13 @@
                             <child>
                               <object class="GtkSpinButton" id="levels_spin_button">
                                 <property name="visible">True</property>
+                                <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
                                 <property name="text" translatable="yes">0</property>
                                 <property name="input_purpose">digits</property>
                                 <property name="adjustment">leevels_adjustment</property>
+                                <property name="snap_to_ticks">True</property>
+                                <property name="numeric">True</property>
                                 <signal name="value-changed" handler="on_levels_spin_button_value_changed" swapped="no"/>
                               </object>
                               <packing>
@@ -1331,6 +1334,7 @@
             <child>
               <object class="GtkMenuButton" id="jpeg_compression_jpeg_arith_menubutton">
                 <property name="visible">True</property>
+                <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="popover">jpeg_compression_jpeg_arith_popover</property>
