@@ -36,5 +36,15 @@
       <summary>JPEG arith compression value</summary>
       <description>JPEG arith compression value</description>
     </key>
+	  <key type="b" name="jpeg-compression-boolean">
+      <default>true</default>
+      <summary>JPEG compression button</summary>
+      <description>Set active state of JPEG compression button</description>
+    </key>
+	  <key type="b" name="jpeg-compression-arith-boolean">
+      <default>false</default>
+      <summary>JPEG compression arith button</summary>
+      <description>Set active state of JPEG arith compression button</description>
+    </key>
 	</schema>
 </schemalist>

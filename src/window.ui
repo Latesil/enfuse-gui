@@ -1278,7 +1278,6 @@
                 <property name="use_stock">True</property>
                 <property name="draw_indicator">True</property>
                 <property name="group">jpeg_arith_compression_radiobutton</property>
-                <signal name="group-changed" handler="on_jpeg_compression_radio_button_group_changed" swapped="no"/>
                 <signal name="toggled" handler="on_jpeg_compression_radio_button_toggled" swapped="no"/>
               </object>
               <packing>
@@ -1327,7 +1326,6 @@
                 <property name="use_stock">True</property>
                 <property name="draw_indicator">True</property>
                 <property name="group">jpeg_compression_radio_button</property>
-                <signal name="toggled" handler="on_jpeg_arith_compression_radiobutton_toggled" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>

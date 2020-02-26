@@ -30,14 +30,19 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     levels_spin_button = Gtk.Template.Child()
     levels_checkbutton = Gtk.Template.Child()
     advanced_options_frame_ = Gtk.Template.Child()
+
+    jpeg_compression_jpeg = Gtk.Template.Child()
     jpeg_compression_jpeg_menubutton = Gtk.Template.Child()
-    jpeg_compression_jpeg_arith_menubutton = Gtk.Template.Child()
-    tiff_compression_menubutton = Gtk.Template.Child()
     jpeg_compression_menubutton = Gtk.Template.Child()
+    jpeg_compression_radio_button = Gtk.Template.Child()
+    jpeg_arith_compression_radiobutton = Gtk.Template.Child()
+    jpeg_compression_jpeg_arith_menubutton = Gtk.Template.Child()
+    jpeg_compression_jpeg_arith_spinbutton = Gtk.Template.Child()
+
+    tiff_compression_menubutton = Gtk.Template.Child()
+
     output_entry = Gtk.Template.Child()
     show_advanced_check_button = Gtk.Template.Child()
-    jpeg_compression_jpeg = Gtk.Template.Child()
-    jpeg_compression_jpeg_arith_spinbutton = Gtk.Template.Child()
 
 
     def __init__(self, **kwargs):
@@ -48,17 +53,15 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         self.start_button.set_visible(True)
         self.jpeg_compression_jpeg_arith_menubutton.set_sensitive(False)
 
+        for s in self.settings.list_keys():
+            self.settings.reset(s)
 
-        self.advanced_options_frame_.set_visible(self.settings.get_boolean('advanced'))
         self.settings.connect("changed::advanced", self.on_show_advanced_check_button_changed, self.show_advanced_check_button)
         self.settings.connect("changed::levels", self.on_scale_changed, self.levels_spin_button)
         self.settings.connect("changed::jpeg-compression", self.on_scale_changed, self.jpeg_compression_jpeg)
         self.settings.connect("changed::jpeg-compression-arith", self.on_scale_changed, self.jpeg_compression_jpeg_arith_spinbutton)
-
-
-        if self.settings.get_string('output') == "":
-            self.settings.reset('output')
-        self.output_entry.set_text(self.settings.get_string('output'))
+        self.settings.connect("changed::jpeg-compression-boolean", self.on_radiobutton_changed, self.jpeg_compression_radio_button)
+        self.settings.connect("changed::jpeg-compression-arith-boolean", self.on_radiobutton_changed, self.jpeg_arith_compression_radiobutton)
 
     @Gtk.Template.Callback()
     def on_start_button_clicked(self, button):
@@ -133,10 +136,6 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         button.set_active(settings.get_boolean(key))
 
     @Gtk.Template.Callback()
-    def on_jpeg_compression_radio_button_group_changed(self, widget):
-        print('on_jpeg_compression_radio_button_group_changed')
-
-    @Gtk.Template.Callback()
     def on_position_entry_changed(self, widget):
         print('on_position_entry_changed')
 
@@ -172,13 +171,13 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         if button.get_active():
             self.jpeg_compression_jpeg_menubutton.set_sensitive(True)
             self.jpeg_compression_jpeg_arith_menubutton.set_sensitive(False)
+            self.settings.set_boolean('jpeg-compression-boolean', True)
+            self.settings.set_boolean('jpeg-compression-arith-boolean', False)
         else:
             self.jpeg_compression_jpeg_menubutton.set_sensitive(False)
             self.jpeg_compression_jpeg_arith_menubutton.set_sensitive(True)
-
-    @Gtk.Template.Callback()
-    def on_jpeg_arith_compression_radiobutton_toggled(self, widget):
-        print('on_jpeg_arith_compression_radiobutton_toggled')
+            self.settings.set_boolean('jpeg-compression-boolean', False)
+            self.settings.set_boolean('jpeg-compression-arith-boolean', True)
 
     @Gtk.Template.Callback()
     def on_hard_mask_radio_button_toggled(self, widget):
@@ -202,3 +201,6 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
 
     def on_scale_changed(self, settings, key, button):
         button.set_value(settings.get_int(key))
+
+    def on_radiobutton_changed(self, settings, key, button):
+        button.set_active(settings.get_boolean(key))
