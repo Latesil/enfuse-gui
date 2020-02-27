@@ -116,5 +116,10 @@
       <summary>Position</summary>
       <description>Manually set the size of the output image; useful for cropped and shifted input TIFF images, such as those produced by Nona</description>
     </key>
+	  <key type="i" name="photos-quantity">
+      <default>0</default>
+      <summary>Photos quantity</summary>
+      <description>How many photos currently in the main screen</description>
+    </key>
 	</schema>
 </schemalist>

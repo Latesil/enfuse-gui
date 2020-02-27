@@ -63,6 +63,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     size_entry = Gtk.Template.Child()
 
     photos_list_box_row = Gtk.Template.Child()
+    basic_label = Gtk.Template.Child()
 
 
     def __init__(self, **kwargs):
@@ -70,11 +71,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
 
         self.settings = Gio.Settings.new('com.gitlab.Latesil.enfuse-gui')
 
-        self.start_label = Gtk.Label()
-        self.start_label.set_text('Click add for adding your photos here')
-        self.start_label.set_visible(True)
-
-        self.photos_list_box_row.insert(self.start_label, -1)
+        self.create_basic_label()
 
         self.jpeg_compression_jpeg_arith_menubutton.set_sensitive(False)
 
@@ -98,6 +95,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         self.settings.connect("changed::soft-mask", self.on_radiobutton_changed, self.soft_mask_radio_button)
         self.settings.connect("changed::position", self.on_scale_changed, self.position_entry)
         self.settings.connect("changed::size", self.on_scale_changed, self.size_entry)
+        self.settings.connect("changed::photos-quantity", self.on_photos_quantity_changed, None)
 
     @Gtk.Template.Callback()
     def on_start_button_clicked(self, button):
@@ -193,7 +191,6 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def on_add_button_clicked(self, button):
-        self.photos_list_box_row.remove(self.start_label.get_parent())
         new_row = PhotoListBox()
         self.photos_list_box_row.add(new_row)
 
@@ -244,6 +241,12 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     def on_boolean_change(self, settings, key, button):
         button.set_active(settings.get_boolean(key))
 
+    def on_photos_quantity_changed(self, settings, key, button):
+        if settings.get_int(key) == 0:
+            self.row.set_visible(True)
+        else:
+            self.row.set_visible(False)
+
     #______________________________________________________________________
 
     def get_item_from_combobox(self, box):
@@ -251,4 +254,12 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         model = box.get_model()
         item = model[tree_iter][0]
         return item
+
+    def create_basic_label(self):
+        self.row = Gtk.ListBoxRow()
+        self.row.set_selectable(False)
+        self.row.add(self.basic_label)
+        self.row.set_visible(True)
+        self.row.set_vexpand(True)
+        self.photos_list_box_row.insert(self.row, -1)
 

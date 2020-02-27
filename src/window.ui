@@ -2,6 +2,12 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
+  <object class="GtkLabel" id="basic_label">
+    <property name="visible">True</property>
+    <property name="sensitive">False</property>
+    <property name="can_focus">False</property>
+    <property name="label" translatable="yes">Click add for adding your photos here</property>
+  </object>
   <object class="GtkAdjustment" id="contrast_weight_adjustment">
     <property name="upper">1</property>
     <property name="step_increment">0.01</property>
