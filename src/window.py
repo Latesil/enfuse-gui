@@ -191,7 +191,11 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def on_add_button_clicked(self, button):
-        new_row = PhotoListBox()
+        new_box = PhotoListBox()
+        new_row = Gtk.ListBoxRow()
+        new_row.set_selectable(False)
+        new_row.add(new_box)
+        new_row.set_visible(True)
         self.photos_list_box_row.add(new_row)
 
     @Gtk.Template.Callback()
