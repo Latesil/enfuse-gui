@@ -91,6 +91,22 @@
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
+  <object class="GtkFileFilter" id="photo_filefilter">
+    <mime-types>
+      <mime-type>image/jpeg</mime-type>
+      <mime-type>image/png</mime-type>
+      <mime-type>image/tiff</mime-type>
+      <mime-type>image/dng</mime-type>
+    </mime-types>
+    <patterns>
+      <pattern>*.png</pattern>
+      <pattern>*.jpg</pattern>
+      <pattern>*.jpeg</pattern>
+      <pattern>*.tif</pattern>
+      <pattern>*.tiff</pattern>
+      <pattern>*.dng</pattern>
+    </patterns>
+  </object>
   <object class="GtkAdjustment" id="position_adjustment">
     <property name="upper">10000</property>
     <property name="step_increment">1</property>

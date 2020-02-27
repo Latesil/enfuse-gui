@@ -193,12 +193,25 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def on_add_button_clicked(self, button):
-        new_box = PhotoListBox('yarr')
-        new_row = Gtk.ListBoxRow()
-        new_row.set_selectable(False)
-        new_row.add(new_box)
-        new_row.set_visible(True)
-        self.photos_list_box_row.add(new_row)
+        chooser = Gtk.FileChooserDialog(title=_("Open Photos"),
+                                        transient_for=self,
+                                        action=Gtk.FileChooserAction.OPEN,
+                                        buttons=(_("Cancel"), Gtk.ResponseType.CANCEL,
+                                                 _("OK"), Gtk.ResponseType.OK))
+        chooser.set_select_multiple(True)
+        response = chooser.run()
+        if response == Gtk.ResponseType.OK:
+            files = chooser.get_filenames()
+            for f in files:
+                new_box = PhotoListBox(f)
+                new_row = Gtk.ListBoxRow()
+                new_row.set_selectable(False)
+                new_row.add(new_box)
+                new_row.set_visible(True)
+                self.photos_list_box_row.add(new_row)
+            chooser.destroy()
+        else:
+            chooser.destroy()
 
     @Gtk.Template.Callback()
     def on_jpeg_compression_radio_button_toggled(self, button):
@@ -249,7 +262,6 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
 
     def on_photos_quantity_changed(self, settings, key, button):
         if settings.get_int(key) == 0:
-            #self.basic_label.set_visible(True)
             self.photos_viewport.remove(self.photos_list_box_row)
             self.photos_viewport.add(self.basic_label)
             self.photos_list_box_row_exists = False
@@ -268,13 +280,6 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         return item
 
     def create_basic_label(self):
-        # self.row = Gtk.ListBoxRow()
-        # self.row.set_selectable(False)
-        # self.row.add(self.basic_label)
-        # self.row.set_visible(True)
-        # self.row.set_vexpand(True)
-        # self.photos_list_box_row.insert(self.row, -1)
-
         self.photos_viewport.remove(self.photos_list_box_row)
         self.photos_viewport.add(self.basic_label)
 
