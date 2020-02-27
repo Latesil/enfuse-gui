@@ -63,6 +63,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     size_entry = Gtk.Template.Child()
 
     photos_list_box_row = Gtk.Template.Child()
+    photos_viewport = Gtk.Template.Child()
     basic_label = Gtk.Template.Child()
 
 
@@ -72,6 +73,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         self.settings = Gio.Settings.new('com.gitlab.Latesil.enfuse-gui')
 
         self.create_basic_label()
+        self.photos_list_box_row_exists = False
 
         self.jpeg_compression_jpeg_arith_menubutton.set_sensitive(False)
 
@@ -191,7 +193,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def on_add_button_clicked(self, button):
-        new_box = PhotoListBox()
+        new_box = PhotoListBox('yarr')
         new_row = Gtk.ListBoxRow()
         new_row.set_selectable(False)
         new_row.add(new_box)
@@ -247,9 +249,15 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
 
     def on_photos_quantity_changed(self, settings, key, button):
         if settings.get_int(key) == 0:
-            self.row.set_visible(True)
+            #self.basic_label.set_visible(True)
+            self.photos_viewport.remove(self.photos_list_box_row)
+            self.photos_viewport.add(self.basic_label)
+            self.photos_list_box_row_exists = False
         else:
-            self.row.set_visible(False)
+            if not self.photos_list_box_row_exists:
+                self.photos_viewport.remove(self.basic_label)
+                self.photos_viewport.add(self.photos_list_box_row)
+                self.photos_list_box_row_exists = True
 
     #______________________________________________________________________
 
@@ -260,10 +268,13 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         return item
 
     def create_basic_label(self):
-        self.row = Gtk.ListBoxRow()
-        self.row.set_selectable(False)
-        self.row.add(self.basic_label)
-        self.row.set_visible(True)
-        self.row.set_vexpand(True)
-        self.photos_list_box_row.insert(self.row, -1)
+        # self.row = Gtk.ListBoxRow()
+        # self.row.set_selectable(False)
+        # self.row.add(self.basic_label)
+        # self.row.set_visible(True)
+        # self.row.set_vexpand(True)
+        # self.photos_list_box_row.insert(self.row, -1)
+
+        self.photos_viewport.remove(self.photos_list_box_row)
+        self.photos_viewport.add(self.basic_label)
 
