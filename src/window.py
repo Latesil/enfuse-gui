@@ -198,6 +198,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
                                         action=Gtk.FileChooserAction.OPEN,
                                         buttons=(_("Cancel"), Gtk.ResponseType.CANCEL,
                                                  _("OK"), Gtk.ResponseType.OK))
+        self.add_filters(chooser)
         chooser.set_select_multiple(True)
         response = chooser.run()
         if response == Gtk.ResponseType.OK:
@@ -282,4 +283,12 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     def create_basic_label(self):
         self.photos_viewport.remove(self.photos_list_box_row)
         self.photos_viewport.add(self.basic_label)
+
+    def add_filters(self, dialog):
+        filter_text = Gtk.FileFilter()
+        filter_text.set_name("Pictures")
+        filter_text.add_mime_type("image/jpeg")
+        filter_text.add_mime_type("image/png")
+        filter_text.add_mime_type("image/tiff")
+        dialog.add_filter(filter_text)
 
