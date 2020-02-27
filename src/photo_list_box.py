@@ -18,7 +18,8 @@ class PhotoListBox(Gtk.Box):
 
         PhotoListBox.i += 1
         self.settings.set_int('photos-quantity', PhotoListBox.i)
-        self.photo_label.set_text(label + '/')
+        self.label = label
+        self.photo_label.set_text(self.label)
 
     @Gtk.Template.Callback()
     def on_photo_button_clicked(self, button):
