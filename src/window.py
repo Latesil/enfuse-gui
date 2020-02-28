@@ -71,7 +71,9 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         super().__init__(**kwargs)
 
         self.final_command = ['enfuse']
-        self.touched = []
+        self.touched = set()
+        self.tiffs = ['tiff', 'tif', 'TIFF', 'TIF']
+        self.jpegs = ['jpeg', 'jpg', 'JPEG', 'JPG']
 
         self.settings = Gio.Settings.new('com.gitlab.Latesil.enfuse-gui')
 
@@ -84,6 +86,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         self.settings.connect("changed::advanced", self.on_show_advanced_check_button_changed, self.show_advanced_check_button)
         self.settings.connect("changed::associated-alpha-hack", self.on_boolean_change, self.associated_alpha_hack_checkbutton)
         self.settings.connect("changed::levels", self.on_scale_changed, self.levels_spin_button)
+        self.settings.connect("changed::auto-levels", self.on_boolean_change, self.levels_spin_button)
         self.settings.connect("changed::jpeg-compression", self.on_scale_changed, self.jpeg_compression_jpeg)
         self.settings.connect("changed::jpeg-compression-arith", self.on_scale_changed, self.jpeg_compression_jpeg_arith_spinbutton)
         self.settings.connect("changed::jpeg-compression-boolean", self.on_radiobutton_changed, self.jpeg_compression_radio_button)
@@ -102,14 +105,42 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def on_start_button_clicked(self, button):
-        if self.settings.get_boolean('jpeg-compression-boolean') != True and 'jpeg-compression' in self.touched:
-            self.touched.remove('jpeg-compression')
-        if self.settings.get_boolean('jpeg-compression-arith-boolean') != True and 'jpeg-compression-arith' in self.touched:
-            self.touched.remove('jpeg-compression-arith')
+        #_____________________________________________________________________________________
+
+        self.final_command = ['enfuse']
+        if self.settings.get_string('output') == "":
+            self.settings.reset('output')
+
+        try:
+            extension = self.settings.get_string('output').rsplit('.', 1)[1]
+        except IndexError:
+            self.show_error_dialog("Please choose correct output filename")
+            return
+
+        if len(self.photos_list_box_row.get_children()) <= 1:
+            self.show_error_dialog("Need more than one file to blend")
+            return
+
+        if extension not in self.tiffs and extension not in self.jpegs:
+            self.show_error_dialog("Output file extension must be tiff or jpeg")
+            return
+        #______________________________________________________________________________________
+
+        if self.settings.get_boolean('auto-levels') == True and 'levels' in self.touched:
+            self.touched.remove('levels')
+
         if self.settings.get_boolean('hard-mask') != True and 'hard-mask' in self.touched:
             self.touched.remove('hard-mask')
         if self.settings.get_boolean('soft-mask') != True and 'soft-mask' in self.touched:
             self.touched.remove('soft-mask')
+
+        if self.settings.get_boolean('associated-alpha-hack') != True and 'associated-alpha-hack' in self.touched:
+            self.touched.remove('associated-alpha-hack')
+
+        if self.settings.get_string('wrap') == 'none' and 'wrap' in self.touched:
+            self.touched.remove('wrap')
+
+        print(self.touched)
 
         self.final_command.append('-o')
         self.final_command.append(self.settings.get_string('output'))
@@ -118,14 +149,21 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
             self.final_command.append('-l')
             self.final_command.append(str(self.settings.get_int('levels')))
 
-        if self.settings.get_string('output').rsplit('.', 1) == 'tiff' and 'tiff-compression' in self.touched:
-            self.final_command.append('--compression=%s' % self.settings.get_string('tiff-compression'))
+        if 'associated-alpha-hack' in self.touched:
+            self.final_command.append('-g')
 
-        if self.settings.get_string('output').rsplit('.', 1) == 'jpeg' and 'jpeg-compression' in self.touched:
-            self.final_command.append('--compression=%s' % self.settings.get_string('jpeg-compression'))
+        if extension in self.tiffs:
+            if self.settings.get_string('tiff-compression') != 'none':
+                self.final_command.append('--compression=%s' % self.settings.get_string('tiff-compression'))
 
-        if self.settings.get_string('output').rsplit('.', 1) == 'jpeg' and 'jpeg-compression-arith' in self.touched:
-            self.final_command.append('--compression=%s' % self.settings.get_string('jpeg-compression-arith'))
+        if extension in self.jpegs:
+            if self.settings.get_boolean('jpeg-compression-boolean'):
+                if self.settings.get_int('jpeg-compression') != 0:
+                    self.final_command.append('--compression=jpeg:%s' % self.settings.get_int('jpeg-compression'))
+
+            if self.settings.get_boolean('jpeg-compression-arith-boolean'):
+                if self.settings.get_int('jpeg-compression-arith') != 0:
+                    self.final_command.append('--compression=jpeg-arith:%s' % self.settings.get_int('jpeg-compression-arith'))
 
         if 'blend-colorspace' in self.touched:
             self.final_command.append('--blend-colorspace=%s' % self.settings.get_string('blend-colorspace'))
@@ -134,31 +172,28 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
             self.final_command.append('--depth=%s' % self.settings.get_string('depth'))
 
         if 'size' in self.touched and 'position' in self.touched:
-            self.final_command.append('-f $sx%s' % str(self.settings.get_int('size')), str(self.settings.get_int('position')))
-
-        if 'associated-alpha-hack' in self.touched:
-            self.final_command.append('-g')
+            self.final_command.append('-f $sx%s' % self.settings.get_int('size'), self.settings.get_int('position'))
 
         if 'wrap' in self.touched:
             self.final_command.append('--wrap=%s' % self.settings.get_string('wrap'))
 
         if 'exposure-weight' in self.touched:
-            self.final_command.append('--exposure-weight=%s' % str(self.settings.get_double('exposure-weight')))
+            self.final_command.append('--exposure-weight=%s' % round(self.settings.get_double('exposure-weight'), 2))
 
         if 'saturation-weight' in self.touched:
-            self.final_command.append('--saturation-weight=%s' % str(self.settings.get_double('saturation-weight')))
+            self.final_command.append('--saturation-weight=%s' % round(self.settings.get_double('saturation-weight'), 2))
 
         if 'contrast-weight' in self.touched:
-            self.final_command.append('--contrast-weight=%s' % str(self.settings.get_double('contrast-weight')))
+            self.final_command.append('--contrast-weight=%s' % round(self.settings.get_double('contrast-weight'), 2))
 
         if 'entropy-weight' in self.touched:
-            self.final_command.append('--entropy-weight=%s' % str(self.settings.get_double('entropy-weight')))
+            self.final_command.append('--entropy-weight=%s' % round(self.settings.get_double('entropy-weight'), 2))
 
         if 'exposure-optimum' in self.touched:
-            self.final_command.append('--exposure-optimum=%s' % str(self.settings.get_double('exposure-optimum')))
+            self.final_command.append('--exposure-optimum=%s' % round(self.settings.get_double('exposure-optimum'), 2))
 
         if 'exposure-width' in self.touched:
-            self.final_command.append('--exposure-width=%s' % str(self.settings.get_double('exposure-width')))
+            self.final_command.append('--exposure-width=%s' % round(self.settings.get_double('exposure-width'), 2))
 
         if 'hard-mask' in self.touched:
             self.final_command.append('-hard-mask')
@@ -174,15 +209,16 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     @Gtk.Template.Callback()
     def on_levels_spin_button_value_changed(self, scale):
         self.settings.set_int('levels', scale.get_value())
-        if 'levels' not in self.touched:
-            self.touched.append('levels')
+        self.touched.add('levels')
 
     @Gtk.Template.Callback()
     def on_levels_checkbutton_toggled(self, button):
         if button.get_active():
             self.levels_spin_button.set_sensitive(False)
+            self.settings.set_boolean('auto-levels', True)
         else:
             self.levels_spin_button.set_sensitive(True)
+            self.settings.set_boolean('auto-levels', False)
 
     @Gtk.Template.Callback()
     def on_output_entry_changed(self, entry):
@@ -191,63 +227,53 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     @Gtk.Template.Callback()
     def on_blend_colorspace_combobox_changed(self, combobox):
         self.settings.set_string('blend-colorspace', self.get_item_from_combobox(combobox))
-        if 'blend-colorspace' not in self.touched:
-            self.touched.append('blend-colorspace')
+        self.touched.add('blend-colorspace')
 
 
     @Gtk.Template.Callback()
     def on_depth_combobox_changed(self, combobox):
         self.settings.set_string('depth', self.get_item_from_combobox(combobox))
-        if 'depth' not in self.touched:
-            self.touched.append('depth')
+        self.touched.add('depth')
 
     @Gtk.Template.Callback()
     def on_associated_alpha_hack_checkbutton_toggled(self, button):
         self.settings.set_boolean('associated-alpha-hack', button.get_active())
-        if 'associated-alpha-hack' not in self.touched:
-            self.touched.append('associated-alpha-hack')
+        self.touched.add('associated-alpha-hack')
 
     @Gtk.Template.Callback()
     def on_wrap_combobox_changed(self, combobox):
         self.settings.set_string('wrap', self.get_item_from_combobox(combobox))
-        if 'wrap' not in self.touched:
-            self.touched.append('wrap')
+        self.touched.add('wrap')
 
     @Gtk.Template.Callback()
     def on_exposure_weight_spinbutton_value_changed(self, scale):
         self.settings.set_double('exposure-weight', scale.get_value())
-        if 'exposure-weight' not in self.touched:
-            self.touched.append('exposure-weight')
+        self.touched.add('exposure-weight')
 
     @Gtk.Template.Callback()
     def on_saturation_weight_spin_button_value_changed(self, scale):
         self.settings.set_double('saturation-weight', scale.get_value())
-        if 'saturation-weight' not in self.touched:
-            self.touched.append('saturation-weight')
+        self.touched.add('saturation-weight')
 
     @Gtk.Template.Callback()
     def on_contrast_weight_spinbutton_value_changed(self, scale):
         self.settings.set_double('contrast-weight', scale.get_value())
-        if 'contrast-weight' not in self.touched:
-            self.touched.append('contrast-weight')
+        self.touched.add('contrast-weight')
 
     @Gtk.Template.Callback()
     def on_entropy_weight_spinbutton_value_changed(self, scale):
         self.settings.set_double('entropy-weight', scale.get_value())
-        if 'entropy-weight' not in self.touched:
-            self.touched.append('entropy-weight')
+        self.touched.add('entropy-weight')
 
     @Gtk.Template.Callback()
     def on_exposure_optimum_spinbutton_value_changed(self, scale):
         self.settings.set_double('exposure-optimum', scale.get_value())
-        if 'exposure-optimum' not in self.touched:
-            self.touched.append('exposure-optimum')
+        self.touched.add('exposure-optimum')
 
     @Gtk.Template.Callback()
     def on_exposure_width_spinbutton_value_changed(self, scale):
         self.settings.set_double('exposure-width', scale.get_value())
-        if 'exposure-width' not in self.touched:
-            self.touched.append('exposure-width')
+        self.touched.add('exposure-width')
 
     @Gtk.Template.Callback()
     def on_show_advanced_check_button_toggled(self, button):
@@ -257,44 +283,37 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     @Gtk.Template.Callback()
     def on_position_entry_value_changed(self, scale):
         self.settings.set_int('position', scale.get_value())
-        if 'position' not in self.touched:
-            self.touched.append('position')
+        self.touched.add('position')
 
     @Gtk.Template.Callback()
     def on_size_entry_value_changed(self, scale):
         self.settings.set_int('size', scale.get_value())
-        if 'size' not in self.touched:
-            self.touched.append('size')
+        self.touched.add('size')
 
     @Gtk.Template.Callback()
     def on_soft_mask_radio_button_toggled(self, button):
         self.settings.set_boolean('soft-mask', button.get_active())
-        if 'soft-mask' not in self.touched:
-            self.touched.append('soft-mask')
+        self.touched.add('soft-mask')
 
     @Gtk.Template.Callback()
     def on_hard_mask_radio_button_toggled(self, button):
         self.settings.set_boolean('hard-mask', button.get_active())
-        if 'hard-mask' not in self.touched:
-            self.touched.append('hard-mask')
+        self.touched.add('hard-mask')
 
     @Gtk.Template.Callback()
     def on_tiff_compression_combobox_changed(self, combobox):
         self.settings.set_string('tiff-compression', self.get_item_from_combobox(combobox))
-        if 'tiff-compression' not in self.touched:
-            self.touched.append('tiff-compression')
+        self.touched.add('tiff-compression')
 
     @Gtk.Template.Callback()
     def on_jpeg_compression_jpeg_value_changed(self, scale):
         self.settings.set_int('jpeg-compression', scale.get_value())
-        if 'jpeg-compression' not in self.touched:
-            self.touched.append('jpeg-compression')
+        self.touched.add('jpeg-compression')
 
     @Gtk.Template.Callback()
     def on_jpeg_compression_jpeg_arith_spinbutton_value_changed(self, scale):
         self.settings.set_int('jpeg-compression-arith', scale.get_value())
-        if 'jpeg-compression-arith' not in self.touched:
-            self.touched.append('jpeg-compression-arith')
+        self.touched.add('jpeg-compression-arith')
 
     @Gtk.Template.Callback()
     def on_add_button_clicked(self, button):
@@ -402,4 +421,11 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     def reset_all(self):
         for s in self.settings.list_keys():
             self.settings.reset(s)
+
+    def show_error_dialog(self, text):
+        dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.ERROR,
+            Gtk.ButtonsType.OK, text)
+        dialog.run()
+        dialog.destroy()
+
 
