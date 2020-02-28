@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import subprocess
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio, GObject, GLib
@@ -70,7 +71,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.final_command = ['flatpak-spawn', '--host', 'enfuse']
+        self.final_command = ['enfuse']
         self.touched = set()
         self.tiffs = ['tiff', 'tif', 'TIFF', 'TIF']
         self.jpegs = ['jpeg', 'jpg', 'JPEG', 'JPG']
@@ -141,7 +142,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
             self.touched.remove('wrap')
 
         self.final_command.append('-o')
-        self.final_command.append(self.settings.get_string('output'))
+        self.final_command.append('/home/stas/' + self.settings.get_string('output'))
 
         #GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES) + '/' +
 
@@ -204,7 +205,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         for child in self.photos_list_box_row.get_children():
             self.final_command.append(child.get_child().label)
 
-        GLib.spawn_async(self.final_command)
+        subprocess.call(self.final_command)
 
     @Gtk.Template.Callback()
     def on_levels_spin_button_value_changed(self, scale):
