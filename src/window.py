@@ -17,7 +17,7 @@
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gio, GObject
+from gi.repository import Gtk, Gio, GObject, GLib
 
 from .photo_list_box import PhotoListBox
 
@@ -70,7 +70,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.final_command = ['enfuse']
+        self.final_command = ['flatpak-spawn', '--host', 'enfuse']
         self.touched = set()
         self.tiffs = ['tiff', 'tif', 'TIFF', 'TIF']
         self.jpegs = ['jpeg', 'jpg', 'JPEG', 'JPG']
@@ -140,10 +140,10 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         if self.settings.get_string('wrap') == 'none' and 'wrap' in self.touched:
             self.touched.remove('wrap')
 
-        print(self.touched)
-
         self.final_command.append('-o')
         self.final_command.append(self.settings.get_string('output'))
+
+        #GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES) + '/' +
 
         if 'levels' in self.touched:
             self.final_command.append('-l')
@@ -204,7 +204,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         for child in self.photos_list_box_row.get_children():
             self.final_command.append(child.get_child().label)
 
-        print(self.final_command)
+        GLib.spawn_async(self.final_command)
 
     @Gtk.Template.Callback()
     def on_levels_spin_button_value_changed(self, scale):
