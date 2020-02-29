@@ -1,7 +1,7 @@
 %global uuid    com.github.Latesil.%{name}
 
 Name:           enfuse-gui
-Version:        0.1.0
+Version:        0.2.0
 Release:        1%{?dist}
 Summary:        Simple gui for enfuse script
 
@@ -56,6 +56,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 
 %changelog
 
-* Thu Feb 20 2020 Latesil <vihilantes@gmail.com> - 0.1.0-1
+* Sat Feb 29 2020 Latesil <vihilantes@gmail.com> - 0.2.0-1
+- Bug fixes
+
+* Sat Feb 29 2020 Latesil <vihilantes@gmail.com> - 0.1.0-1
 - Initial package
 
