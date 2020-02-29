@@ -217,9 +217,21 @@ msgstr "Количество фото"
 msgid "How many photos currently in the main screen"
 msgstr "Сколько фото выбрано на главном экране"
 
+#: enfuse-gui/src/window.py:119
+msgid "Please choose correct output filename"
+msgstr "Пожалуйста выберите корректное название для файла"
+
+#: enfuse-gui/src/window.py:123
+msgid "Need more than one file to blend"
+msgstr "Нужен более чем один файл"
+
+#: enfuse-gui/src/window.py:127
+msgid "Output file extension must be tiff or jpeg"
+msgstr "Расширение выходног офайла может быть tiff или jpeg"
+
 #: enfuse-gui/src/window.py:319
 msgid "Open Photos"
-msgstr "Открыть Фото"
+msgstr "Открыть фото"
 
 #: enfuse-gui/src/window.py:322
 msgid "Cancel"
@@ -228,6 +240,14 @@ msgstr "Отмена"
 #: enfuse-gui/src/window.py:323
 msgid "OK"
 msgstr "OK"
+
+#: enfuse-gui/src/window.py:362
+msgid "A simple GUI for enfuse script"
+msgstr "Простой gui для enfuse-скрипта"
+
+#: enfuse-gui/src/window.py:364
+msgid "Website"
+msgstr "Вебсайт"
 
 #: enfuse-gui/src/window.ui:9
 msgid "Click add for adding your photos here"

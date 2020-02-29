@@ -1,7 +1,8 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2020-02-29 15:18+0300\n"
+"POT-Creation-Date: 2020-03-01 00:04+0300\n"
 "PO-Revision-Date: 2020-02-29 15:18+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,7 +14,7 @@ msgstr ""
 "X-Poedit-Basepath: ../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: enfuse-gui\n"
-"X-Poedit-SearchPath-1: .\n"
+"X-Poedit-SearchPath-1: enfuse-gui-v0.3.0/src\n"
 
 #: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:6
 #: enfuse-gui/src/window.ui:292
@@ -211,6 +212,18 @@ msgstr ""
 msgid "How many photos currently in the main screen"
 msgstr ""
 
+#: enfuse-gui/src/window.py:119
+msgid "Please choose correct output filename"
+msgstr ""
+
+#: enfuse-gui/src/window.py:123
+msgid "Need more than one file to blend"
+msgstr ""
+
+#: enfuse-gui/src/window.py:127
+msgid "Output file extension must be tiff or jpeg"
+msgstr ""
+
 #: enfuse-gui/src/window.py:319
 msgid "Open Photos"
 msgstr ""
@@ -221,6 +234,14 @@ msgstr ""
 
 #: enfuse-gui/src/window.py:323
 msgid "OK"
+msgstr ""
+
+#: enfuse-gui/src/window.py:362
+msgid "A simple GUI for enfuse script"
+msgstr ""
+
+#: enfuse-gui/src/window.py:364
+msgid "Website"
 msgstr ""
 
 #: enfuse-gui/src/window.ui:9

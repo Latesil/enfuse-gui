@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from locale import gettext as _
 import subprocess
 import gi
 gi.require_version('Gtk', '3.0')
@@ -115,15 +116,15 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
         try:
             extension = self.settings.get_string('output').rsplit('.', 1)[1]
         except IndexError:
-            self.show_error_dialog("Please choose correct output filename")
+            self.show_error_dialog(_("Please choose correct output filename"))
             return
 
         if len(self.photos_list_box_row.get_children()) <= 1:
-            self.show_error_dialog("Need more than one file to blend")
+            self.show_error_dialog(_("Need more than one file to blend"))
             return
 
         if extension not in self.tiffs and extension not in self.jpegs:
-            self.show_error_dialog("Output file extension must be tiff or jpeg")
+            self.show_error_dialog(_("Output file extension must be tiff or jpeg"))
             return
         #______________________________________________________________________________________
 
@@ -354,13 +355,13 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     def on_about_button_clicked(self, button):
         about = Gtk.AboutDialog()
         about.set_program_name("Enfuse GUI")
-        about.set_version("0.0.1")
+        about.set_version("0.3.1")
         about.set_authors(["Latesil"])
-        #about.set_logo_icon_name('com.gitlab.Latesil.enfuse-gui')
+        about.set_logo_icon_name('com.gitlab.Latesil.enfuse-gui')
         about.set_copyright("GPLv3+")
-        about.set_comments("A simple GUI for enfuse script")
+        about.set_comments(_("A simple GUI for enfuse script"))
         about.set_website("https://gitlab.com/Latesil/enfuse-gui")
-        about.set_website_label("Website")
+        about.set_website_label(_("Website"))
         about.set_wrap_license(True)
         about.set_license_type(Gtk.License.GPL_3_0)
         about.run()
