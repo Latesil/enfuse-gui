@@ -5,6 +5,8 @@ project('enfuse-gui',
                    ],
 )
 
+appname = 'com.gitlab.Latesil.enfuse-gui'
+
 i18n = import('i18n')
 
 
