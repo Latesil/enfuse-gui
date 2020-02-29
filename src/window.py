@@ -355,7 +355,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
     def on_about_button_clicked(self, button):
         about = Gtk.AboutDialog()
         about.set_program_name("Enfuse GUI")
-        about.set_version("0.3.1")
+        about.set_version("0.4.0")
         about.set_authors(["Latesil"])
         about.set_logo_icon_name('com.gitlab.Latesil.enfuse-gui')
         about.set_copyright("GPLv3+")
