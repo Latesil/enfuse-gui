@@ -142,9 +142,7 @@ class EnfuseGuiWindow(Gtk.ApplicationWindow):
             self.touched.remove('wrap')
 
         self.final_command.append('-o')
-        self.final_command.append('/home/stas/' + self.settings.get_string('output'))
-
-        #GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES) + '/' +
+        self.final_command.append(GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES) + '/'  + self.settings.get_string('output'))
 
         if 'levels' in self.touched:
             self.final_command.append('-l')
