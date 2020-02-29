@@ -16,6 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import sys
+import locale
 import gi
 
 gi.require_version('Gtk', '3.0')
@@ -24,6 +25,7 @@ from gi.repository import Gtk, Gio
 
 from .window import EnfuseGuiWindow
 
+locale.textdomain('com.gitlab.Latesil.enfuse-gui')
 
 class Application(Gtk.Application):
     def __init__(self):
