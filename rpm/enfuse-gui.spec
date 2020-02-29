@@ -1,4 +1,4 @@
-%global uuid    com.github.Latesil.%{name}
+%global uuid    com.gitlab.Latesil.%{name}
 
 Name:           enfuse-gui
 Version:        0.2.0
