@@ -1,0 +1,461 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2020-02-29 15:18+0300\n"
+"PO-Revision-Date: 2020-02-29 16:35+0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"X-Poedit-Basepath: ../..\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Last-Translator: \n"
+"Language: ru\n"
+"X-Poedit-SearchPath-0: enfuse-gui\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:6
+#: enfuse-gui/src/window.ui:292
+msgid "Levels"
+msgstr "Уровни"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:7
+msgid "Number of blending LEVELS to use"
+msgstr "Количество уровней смешивания"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:11
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:12
+#: enfuse-gui/src/window.ui:325
+msgid "Auto levels"
+msgstr "Автоуровень"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:16
+msgid "Show advanced"
+msgstr "Показать продвинутые настройки"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:17
+msgid "Show advanced preferences or not"
+msgstr "Показывать продвинутые настройки или нет"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:21
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:22
+#: enfuse-gui/src/window.ui:367
+msgid "Output filename"
+msgstr "Имя файла"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:26
+msgid "Tiff compression"
+msgstr "Tiff компрессия"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:27
+msgid "Tiff compression for output file"
+msgstr "Tiff компрессия выходного файла"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:31
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:32
+msgid "JPEG compression value"
+msgstr "Уровень JPEG компрессии"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:36
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:37
+msgid "JPEG arith compression value"
+msgstr "Уровень JPEG arith компрессии"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:41
+msgid "JPEG compression button"
+msgstr "JPEG компрессия"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:42
+msgid "Set active state of JPEG compression button"
+msgstr "JPEG компрессия активна"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:46
+msgid "JPEG compression arith button"
+msgstr "JPEG arith компрессия"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:47
+msgid "Set active state of JPEG arith compression button"
+msgstr "JPEG arith компрессия активна"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:51
+msgid "Exposure weight value"
+msgstr "Значение веса экспозиции"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:52
+#: enfuse-gui/src/window.ui:861
+msgid "Weight given to well-exposed pixels"
+msgstr "Вес для хорошо экспонированных пикселей"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:56
+msgid "Saturation weigh value"
+msgstr "Значение веса сатурации"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:57
+#: enfuse-gui/src/window.ui:916
+msgid "Weight given to highly-saturated pixels"
+msgstr "Вес для сатурированных пикселей"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:61
+msgid "Contrast weight value"
+msgstr "Значение веса контрастности"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:62
+#: enfuse-gui/src/window.ui:971
+msgid "Weight given to pixels in high-contrast neighborhoods"
+msgstr "Вес для высококонтрастных пикселей "
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:66
+msgid "Entropy weight value"
+msgstr "Значение веса энтропии"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:67
+#: enfuse-gui/src/window.ui:1025
+msgid "Weight given to pixels in high entropy neighborhoods"
+msgstr "Вес для высокоэнтропийных пикселей"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:71
+msgid "Exposure optimum value"
+msgstr "Оптимальное значение экспозиции"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:72
+#: enfuse-gui/src/window.ui:1079
+msgid "Optimum exposure value, usually the maximum of the weighting function"
+msgstr "Оптимальное значение экспозиции, обычно максимум весовой функции"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:76
+msgid "Exposure width value"
+msgstr "Значение ширины экспозиции"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:77
+#: enfuse-gui/src/window.ui:1134
+msgid "Characteristic width of the weighting function"
+msgstr "Характеристическая ширина весовой функции"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:81
+msgid "Soft mask"
+msgstr "Мягкая маска"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:82
+#: enfuse-gui/src/window.ui:1189
+msgid "Average over all masks"
+msgstr "Средние по всем маскам"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:86
+msgid "Hard mask"
+msgstr "Жесткая маска"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:87
+msgid ""
+"Force hard blend masks and no averaging on finest scale; this is especially "
+"useful for focus stacks with thin and high contrast features, but leads to "
+"increased noise"
+msgstr ""
+"Принудительное смешение маски при отсутствии усреднения на самом точном "
+"масштабе; это особенно полезно для стеков с тонкими и высококонтрастными "
+"деталями, но приводит к увеличению шума"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:91
+msgid "Blend colorspace"
+msgstr "Цветовое пространство смешения"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:92
+msgid "Force colorspqce for blending operations"
+msgstr "Цветовое пространство для операций смешивания"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:96
+msgid "Depth image"
+msgstr "Глубина изображения"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:97
+msgid "Set the number of bits per channel of the output image"
+msgstr "Установить количество битов в каналах итогового изображения"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:101
+msgid "Wrap image"
+msgstr "Обернуть изображение"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:102
+#: enfuse-gui/src/window.ui:764
+msgid "Wrap around image boundary"
+msgstr "Обернуть границы изображения"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:106
+msgid "Associated-alpha hack"
+msgstr "Ассоциированный альфа-хак"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:107
+#: enfuse-gui/src/window.ui:712
+msgid "Associated-alpha hack for Gimp (before version 2) and Cinepaint"
+msgstr "Ассоциированный альфа-хак для Gimp (до версии 2) и Cinepaint"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:111
+#: enfuse-gui/src/window.ui:651 enfuse-gui/src/window.ui:1475
+msgid "Size"
+msgstr "Размер"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:112
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:117
+msgid ""
+"Manually set the size of the output image; useful for cropped and shifted "
+"input TIFF images, such as those produced by Nona"
+msgstr ""
+"Вручную устанавливает размер выходного изображения; полезно для обрезанных "
+"и сдвинутых изображений TIFF, таких как изображения, сделанные Nona"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:116
+#: enfuse-gui/src/window.ui:671 enfuse-gui/src/window.ui:1460
+msgid "Position"
+msgstr "Позиция"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:121
+msgid "Photos quantity"
+msgstr "Количество фото"
+
+#: enfuse-gui/data/com.gitlab.Latesil.enfuse-gui.gschema.xml:122
+msgid "How many photos currently in the main screen"
+msgstr "Сколько фото выбрано на главном экране"
+
+#: enfuse-gui/src/window.py:319
+msgid "Open Photos"
+msgstr "Открыть Фото"
+
+#: enfuse-gui/src/window.py:322
+msgid "Cancel"
+msgstr "Отмена"
+
+#: enfuse-gui/src/window.py:323
+msgid "OK"
+msgstr "OK"
+
+#: enfuse-gui/src/window.ui:9
+msgid "Click add for adding your photos here"
+msgstr "Нажмите \"Добавить\" для добавления фото здесь"
+
+#: enfuse-gui/src/window.ui:47
+msgid "JPEG compression level"
+msgstr "Уровень JPEG компрессии"
+
+#: enfuse-gui/src/window.ui:66
+msgid "JPEG arith compression level"
+msgstr "Уровень JPEG arith компрессии"
+
+#: enfuse-gui/src/window.ui:83 enfuse-gui/src/window.ui:135
+#: enfuse-gui/src/window.ui:1494
+msgid "jpeg"
+msgstr "jpeg"
+
+#: enfuse-gui/src/window.ui:132
+msgid "deflate"
+msgstr "deflate"
+
+#: enfuse-gui/src/window.ui:138 enfuse-gui/src/window.ui:1497
+msgid "lzw"
+msgstr "lzw"
+
+#: enfuse-gui/src/window.ui:141 enfuse-gui/src/window.ui:767
+#: enfuse-gui/src/window.ui:1495
+msgid "none"
+msgstr "none"
+
+#: enfuse-gui/src/window.ui:144 enfuse-gui/src/window.ui:1496
+msgid "packbits"
+msgstr "packbits"
+
+#: enfuse-gui/src/window.ui:159
+msgid "Start"
+msgstr "Старт"
+
+#: enfuse-gui/src/window.ui:167
+msgid "Add"
+msgstr "Добавить"
+
+#: enfuse-gui/src/window.ui:242
+msgid "Photos"
+msgstr "Фото"
+
+#: enfuse-gui/src/window.ui:305
+msgid "0"
+msgstr "0"
+
+#: enfuse-gui/src/window.ui:306
+msgid "Number of blending levels"
+msgstr "Количество уровней смешивания"
+
+#: enfuse-gui/src/window.ui:321
+msgid "Auto"
+msgstr "Автоматически"
+
+#: enfuse-gui/src/window.ui:355
+msgid "Output"
+msgstr "Выходной файл"
+
+#: enfuse-gui/src/window.ui:368
+msgid "a.tif"
+msgstr "a.tif"
+
+#: enfuse-gui/src/window.ui:410
+msgid "Compression"
+msgstr "Компрессия"
+
+#: enfuse-gui/src/window.ui:428
+msgid "Tiff"
+msgstr "Tiff"
+
+#: enfuse-gui/src/window.ui:448
+msgid "JPEG"
+msgstr "JPEG"
+
+#: enfuse-gui/src/window.ui:473
+msgid "Common Options"
+msgstr "Обычные настройки"
+
+#: enfuse-gui/src/window.ui:519
+msgid "Blend Colorspace"
+msgstr "Цветовое пространство"
+
+#: enfuse-gui/src/window.ui:531
+msgid "Colorspace for blending operations"
+msgstr "Цветовое пространство для смешивания"
+
+#: enfuse-gui/src/window.ui:535
+msgid "CIELUV"
+msgstr "CIELUV"
+
+#: enfuse-gui/src/window.ui:536
+msgid "CIELAB"
+msgstr "CIELAB"
+
+#: enfuse-gui/src/window.ui:537
+msgid "CIECAM"
+msgstr "CIECAM"
+
+#: enfuse-gui/src/window.ui:576
+msgid "Depth"
+msgstr "Глубина"
+
+#: enfuse-gui/src/window.ui:588
+msgid "Number of bits per channel of the output image"
+msgstr "Количество битов на канал в итоговом изображении"
+
+#: enfuse-gui/src/window.ui:590
+msgid "8"
+msgstr "8"
+
+#: enfuse-gui/src/window.ui:591
+msgid "16"
+msgstr "16"
+
+#: enfuse-gui/src/window.ui:592
+msgid "32"
+msgstr "32"
+
+#: enfuse-gui/src/window.ui:593
+msgid "r32"
+msgstr "r32"
+
+#: enfuse-gui/src/window.ui:594
+msgid "r64"
+msgstr "r64"
+
+#: enfuse-gui/src/window.ui:633
+msgid "Size and Position"
+msgstr "Размер и Позиция"
+
+#: enfuse-gui/src/window.ui:699
+msgid "Associated-alpha Hack"
+msgstr "Ассоциированный альфа-хак"
+
+#: enfuse-gui/src/window.ui:752
+msgid "Wrap"
+msgstr "Обернуть"
+
+#: enfuse-gui/src/window.ui:768
+msgid "horizontal"
+msgstr "horizontal"
+
+#: enfuse-gui/src/window.ui:769
+msgid "vertical"
+msgstr "vertical"
+
+#: enfuse-gui/src/window.ui:770
+msgid "both"
+msgstr "both"
+
+#: enfuse-gui/src/window.ui:806
+msgid "Advanced Options"
+msgstr "Продвинутые Настройки"
+
+#: enfuse-gui/src/window.ui:849
+msgid "Exposure Weight"
+msgstr "Вес Экспозиции"
+
+#: enfuse-gui/src/window.ui:904
+msgid "Saturation Weight"
+msgstr "Вес Сатурации"
+
+#: enfuse-gui/src/window.ui:959
+msgid "Contrast Weight"
+msgstr "Вес Контраста"
+
+#: enfuse-gui/src/window.ui:1013
+msgid "Entropy Weight"
+msgstr "Вес Энтропии"
+
+#: enfuse-gui/src/window.ui:1067
+msgid "Exposure Optimum"
+msgstr "Оптимальное Значение Экспозиции "
+
+#: enfuse-gui/src/window.ui:1122
+msgid "Exposure Width"
+msgstr "Ширина Экспозиции"
+
+#: enfuse-gui/src/window.ui:1185
+msgid "Soft Mask"
+msgstr "Мягкая Маска"
+
+#: enfuse-gui/src/window.ui:1203
+msgid "Hard Mask"
+msgstr "Жесткая Маска"
+
+#: enfuse-gui/src/window.ui:1207
+msgid "Force hard blend masks and no averaging on finest scale"
+msgstr ""
+"Принудительное смешение маски без усреднения на самых маленьких масштабах"
+
+#: enfuse-gui/src/window.ui:1233
+msgid "Fusion Options"
+msgstr "Настройки Смешения"
+
+#: enfuse-gui/src/window.ui:1246
+msgid "Preferences"
+msgstr "Настройки"
+
+#: enfuse-gui/src/window.ui:1277
+msgid "Show Advanced"
+msgstr "Показать продвинутые настройки "
+
+#: enfuse-gui/src/window.ui:1290
+msgid "Show advanced options"
+msgstr "Показать продвинутые опции"
+
+#: enfuse-gui/src/window.ui:1328
+msgid "About"
+msgstr "О программе"
+
+#: enfuse-gui/src/window.ui:1385
+msgid "Jpeg"
+msgstr "Jpeg"
+
+#: enfuse-gui/src/window.ui:1433
+msgid "Jpeg Arith"
+msgstr "Jpeg Arith"
+
+#: enfuse-gui/src/window.ui:1490
+msgid "Tiff compression method"
+msgstr "Метод компрессии Tiff"
+
+#: enfuse-gui/src/window.ui:1493
+msgid "defliate"
+msgstr "defliate"
