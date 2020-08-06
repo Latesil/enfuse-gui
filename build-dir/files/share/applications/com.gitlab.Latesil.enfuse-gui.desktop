@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=enfuse-gui
-Exec=enfuse-gui
-Icon=com.gitlab.Latesil.enfuse-gui
-Terminal=false
-Type=Application
-Categories=GTK;
-StartupNotify=true
