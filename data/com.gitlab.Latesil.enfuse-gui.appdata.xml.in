@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-	<id>com.gitlab.Latesil.enfuse-gui.desktop</id>
-	<metadata_license>CC0-1.0</metadata_license>
-	<project_license>GPL-3.0-or-later</project_license>
-	<description>
-	</description>
+  <id>com.gitlab.Latesil.enfuse-gui</id>
+  <metadata_license>CC0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <name>Enfuse GUI</name>
+  <summary>Gui for enfuse script</summary>
+  <description>
+    <p>Simple GUI for enfuse script</p>
+  </description>
+  <provides>
+    <binary>enfuse-gui</binary>
+  </provides>
+  <developer_name>Lateseal</developer_name>
+  <url type="homepage">https://gitlab.com/Latesil/enfuse-gui</url>
+  <url type="bugtracker">https://gitlab.com/Latesil/enfuse-gui/-/issues</url>
 </component>

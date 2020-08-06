@@ -32,8 +32,8 @@
             "buildsystem" : "meson",
             "sources" : [
                 {
-                    "type" : "git",
-                    "url" : "file:///home/late/Programs/enfuse-gui/enfuse-gui"
+                    "type" : "dir",
+                    "path" : "/var/home/late/Documents/Prog/enfuse-gui"
                 }
             ]
         }
