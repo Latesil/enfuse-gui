@@ -1,0 +1,5 @@
+[Runtime]
+name=com.gitlab.Latesil.enfuse_gui.Locale
+
+[ExtensionOf]
+ref=app/com.gitlab.Latesil.enfuse-gui/x86_64/master
